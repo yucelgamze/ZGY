@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>Genel Çalışmalar için Function Group</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGY_FG_0000TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGY_FG_0000</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZABAP_001_FM_DMS_TO_BINARY</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>DMS Binary Data</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IP_DOKNR</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>DRAW-DOKNR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EP_MSG</PARAMETER>
+       <TYP>STRING</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ES_ACCESS_INFO</PARAMETER>
+       <TYP>SCMS_ACINF</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EP_XSTRING</PARAMETER>
+       <TYP>XSTRING</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EP_FILE_TYPE</PARAMETER>
+       <TYP>DAPPL</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EP_FILE_NAME</PARAMETER>
+       <TYP>CHAR200</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IP_DOKNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Doküman numarası</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EP_MSG</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ES_ACCESS_INFO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>SCMS:  Information on Document Contents in Internal Tables</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EP_XSTRING</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EP_FILE_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>İş istasyonu uygulaması</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EP_FILE_NAME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Metin alanı uzunluğu 200</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZABAP_001_FM_SENDMAIL</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>Send mail with attachments</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_CONTENT</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>STRING</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_SUBJECT</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>SO_OBJ_DES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IT_RECIPIENTS</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>BCSY_SMTPA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IT_PDF_NAME</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>ZABAP_001_TT_FPNAME</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_TAB_FOR_EXCEL</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>TABNAME</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_RETURN</PARAMETER>
+       <TYP>STRING</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_RETURN_TYPE</PARAMETER>
+       <TYP>CHAR1</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_CONTENT</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_SUBJECT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Kısa içerik tanımı</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_RECIPIENTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BCS: SMTP adresleri ile dahili tablo</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_PDF_NAME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Adobe Form Form nesnesinin adı :fpname tt</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_TAB_FOR_EXCEL</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Tablo adı</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_RETURN</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_RETURN_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Tek basamaklı gösterge</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

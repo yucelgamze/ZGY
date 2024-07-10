@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SFPI" serializer_version="v1.0.0">
+ <asx:abap version="1.0" xmlns:asx="http://www.sap.com/abapxml">
+  <asx:values>
+   <VERSION>1</VERSION>
+   <TYPE/>
+   <INTERFACE href="#o1"/>
+   <INTERFACET>
+    <FPINTERFACET>
+     <NAME/>
+     <STATE/>
+     <LANGUAGE>T</LANGUAGE>
+     <ID/>
+     <TEXT>Stok Giriş Fişi</TEXT>
+    </FPINTERFACET>
+   </INTERFACET>
+  </asx:values>
+  <asx:heap xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:abap="http://www.sap.com/abapxml/types/built-in" xmlns:cls="http://www.sap.com/abapxml/classes/global" xmlns:dic="http://www.sap.com/abapxml/types/dictionary">
+   <cls:CL_FP_INTERFACE_DATA id="o1">
+    <CL_FP_INTERFACE_DATA classVersion="1">
+     <CODING href="#o5"/>
+     <PARAMETERS href="#o4"/>
+     <GLOBAL_DEFINITIONS href="#o3"/>
+     <REFERENCE_FIELDS href="#o2"/>
+     <XSD_DEFINITIONS/>
+    </CL_FP_INTERFACE_DATA>
+   </cls:CL_FP_INTERFACE_DATA>
+   <cls:CL_FP_REFERENCE_FIELDS id="o2">
+    <CL_FP_INTERFACE_DATA_CHANGED classVersion="1">
+     <INTERFACE_DATA href="#o1"/>
+    </CL_FP_INTERFACE_DATA_CHANGED>
+    <CL_FP_REFERENCE_FIELDS classVersion="1">
+     <REFERENCE_FIELDS>
+      <SFPREF>
+       <ACTIVE/>
+       <STANDARD/>
+       <DATATYPE>QUAN</DATATYPE>
+       <VALUE>GT_TABLE-BPMNG</VALUE>
+       <UNIT>GT_TABLE-BPRME</UNIT>
+      </SFPREF>
+      <SFPREF>
+       <ACTIVE/>
+       <STANDARD/>
+       <DATATYPE>QUAN</DATATYPE>
+       <VALUE>GT_TABLE-ERFMG</VALUE>
+       <UNIT>GT_TABLE-ERFME</UNIT>
+      </SFPREF>
+      <SFPREF>
+       <ACTIVE/>
+       <STANDARD/>
+       <DATATYPE>CURR</DATATYPE>
+       <VALUE>GT_TABLE-DMBTR</VALUE>
+       <UNIT>GT_TABLE-WAERS</UNIT>
+      </SFPREF>
+     </REFERENCE_FIELDS>
+    </CL_FP_REFERENCE_FIELDS>
+   </cls:CL_FP_REFERENCE_FIELDS>
+   <cls:CL_FP_GLOBAL_DEFINITIONS id="o3">
+    <CL_FP_INTERFACE_DATA_CHANGED classVersion="1">
+     <INTERFACE_DATA href="#o1"/>
+    </CL_FP_INTERFACE_DATA_CHANGED>
+    <CL_FP_GLOBAL_DEFINITIONS classVersion="1">
+     <GLOBAL_DATA>
+      <SFPGDATA>
+       <NAME>GS_DATA</NAME>
+       <TYPING>TYPE</TYPING>
+       <TYPENAME>ZMM_005_S_DATA</TYPENAME>
+       <DEFAULTVAL/>
+       <CONSTANT/>
+      </SFPGDATA>
+      <SFPGDATA>
+       <NAME>GT_TABLE</NAME>
+       <TYPING>TYPE</TYPING>
+       <TYPENAME>ZMM_005_TT_TAB</TYPENAME>
+       <DEFAULTVAL/>
+       <CONSTANT/>
+      </SFPGDATA>
+      <SFPGDATA>
+       <NAME>GS_TABLE</NAME>
+       <TYPING>TYPE</TYPING>
+       <TYPENAME>ZMM_005_S_TAB</TYPENAME>
+       <DEFAULTVAL/>
+       <CONSTANT/>
+      </SFPGDATA>
+     </GLOBAL_DATA>
+     <TYPES/>
+     <FIELDSYMBOLS/>
+    </CL_FP_GLOBAL_DEFINITIONS>
+   </cls:CL_FP_GLOBAL_DEFINITIONS>
+   <cls:CL_FP_PARAMETERS id="o4">
+    <CL_FP_INTERFACE_DATA_CHANGED classVersion="1">
+     <INTERFACE_DATA href="#o1"/>
+    </CL_FP_INTERFACE_DATA_CHANGED>
+    <CL_FP_PARAMETERS classVersion="1">
+     <IMPORT_PARAMETERS>
+      <SFPIOPAR>
+       <NAME>IV_MBLNR</NAME>
+       <TYPING>TYPE</TYPING>
+       <TYPENAME>MBLNR</TYPENAME>
+       <OPTIONAL>X</OPTIONAL>
+       <BYVALUE>X</BYVALUE>
+       <DEFAULTVAL/>
+       <STANDARD/>
+       <CONSTANT/>
+      </SFPIOPAR>
+     </IMPORT_PARAMETERS>
+     <EXPORT_PARAMETERS/>
+     <TABLE_PARAMETERS/>
+     <EXCEPTIONS/>
+    </CL_FP_PARAMETERS>
+   </cls:CL_FP_PARAMETERS>
+   <cls:CL_FP_CODING id="o5">
+    <CL_FP_INTERFACE_DATA_CHANGED classVersion="1">
+     <INTERFACE_DATA href="#o1"/>
+    </CL_FP_INTERFACE_DATA_CHANGED>
+    <CL_FP_CODING classVersion="1">
+     <INPUT_PARAMETERS>
+      <FPPARAMETER>GT_TABLE</FPPARAMETER>
+      <FPPARAMETER>GS_DATA</FPPARAMETER>
+      <FPPARAMETER>IV_MBLNR</FPPARAMETER>
+      <FPPARAMETER>GS_TABLE</FPPARAMETER>
+     </INPUT_PARAMETERS>
+     <OUTPUT_PARAMETERS>
+      <FPPARAMETER>GT_TABLE</FPPARAMETER>
+      <FPPARAMETER>GS_DATA</FPPARAMETER>
+      <FPPARAMETER>IV_MBLNR</FPPARAMETER>
+      <FPPARAMETER>GS_TABLE</FPPARAMETER>
+     </OUTPUT_PARAMETERS>
+     <INITIALIZATION>
+      <FPCLINE>      SELECT</FPCLINE>
+      <FPCLINE>      mkpf~cpudt,</FPCLINE>
+      <FPCLINE>      lfa1~lifnr,</FPCLINE>
+      <FPCLINE>      lfa1~name1,</FPCLINE>
+      <FPCLINE>      t001~butxt,</FPCLINE>
+      <FPCLINE>      mseg~lgort,</FPCLINE>
+      <FPCLINE>      t001l~lgobe,</FPCLINE>
+      <FPCLINE>      mseg~ebeln,</FPCLINE>
+      <FPCLINE>      mseg~mblnr,</FPCLINE>
+      <FPCLINE>      mkpf~xblnr</FPCLINE>
+      <FPCLINE>      FROM mseg</FPCLINE>
+      <FPCLINE>      INNER JOIN mkpf ON mseg~mblnr = mkpf~mblnr</FPCLINE>
+      <FPCLINE>      LEFT JOIN lfa1 ON mseg~lifnr = lfa1~lifnr</FPCLINE>
+      <FPCLINE>      LEFT JOIN t001 ON mseg~bukrs = t001~bukrs</FPCLINE>
+      <FPCLINE>      LEFT JOIN t001l ON mseg~lgort = t001l~lgort</FPCLINE>
+      <FPCLINE>      WHERE mseg~mblnr = @iv_mblnr</FPCLINE>
+      <FPCLINE>      INTO TABLE @DATA(lt_data).</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE>      DELETE ADJACENT DUPLICATES FROM lt_data COMPARING mblnr.</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE>      LOOP AT lt_data ASSIGNING FIELD-SYMBOL(&lt;lfs_data&gt;).</FPCLINE>
+      <FPCLINE>        gs_data = CORRESPONDING #( &lt;lfs_data&gt; ).</FPCLINE>
+      <FPCLINE>        gs_data = VALUE #( BASE gs_data</FPCLINE>
+      <FPCLINE>                               datum     = sy-datum</FPCLINE>
+      <FPCLINE>                               uname     = sy-uname</FPCLINE>
+      <FPCLINE>                               tedarikci = | { &lt;lfs_data&gt;-lifnr }{ &lt;lfs_data&gt;-name1 } |</FPCLINE>
+      <FPCLINE>                               depo      = | { &lt;lfs_data&gt;-lgort }{ &lt;lfs_data&gt;-lgobe } |</FPCLINE>
+      <FPCLINE>                              ).</FPCLINE>
+      <FPCLINE>      ENDLOOP.</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE>      IF sy-subrc IS INITIAL AND lt_data IS NOT INITIAL.</FPCLINE>
+      <FPCLINE>        SELECT</FPCLINE>
+      <FPCLINE>        mseg~matnr,</FPCLINE>
+      <FPCLINE>        makt~maktx,</FPCLINE>
+      <FPCLINE>        mseg~meins,</FPCLINE>
+      <FPCLINE>        mseg~bpmng,</FPCLINE>
+      <FPCLINE>        mseg~erfmg,</FPCLINE>
+      <FPCLINE>        mseg~dmbtr,</FPCLINE>
+      <FPCLINE>        ekko~ebeln,</FPCLINE>
+      <FPCLINE>        ekpo~peinh,</FPCLINE>
+      <FPCLINE>        makt~spras</FPCLINE>
+      <FPCLINE>        FROM mseg</FPCLINE>
+      <FPCLINE>        LEFT JOIN makt ON mseg~matnr = makt~matnr</FPCLINE>
+      <FPCLINE>        INNER JOIN ekko ON mseg~ebeln = ekko~ebeln</FPCLINE>
+      <FPCLINE>        INNER JOIN ekpo ON ekko~ebeln = ekpo~ebeln</FPCLINE>
+      <FPCLINE>        FOR ALL ENTRIES IN @lt_data</FPCLINE>
+      <FPCLINE>        WHERE mseg~mblnr = @lt_data-mblnr</FPCLINE>
+      <FPCLINE>           AND   makt~spras = &apos;T&apos;</FPCLINE>
+      <FPCLINE>        INTO TABLE @DATA(lt_tab).</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE>        LOOP AT lt_tab ASSIGNING FIELD-SYMBOL(&lt;lfs_tab&gt;).</FPCLINE>
+      <FPCLINE>          gs_table = CORRESPONDING #( &lt;lfs_tab&gt; ).</FPCLINE>
+      <FPCLINE>          gs_table-br_fiyat = | { &lt;lfs_tab&gt;-peinh } |.</FPCLINE>
+      <FPCLINE>          APPEND gs_table TO gt_table.</FPCLINE>
+      <FPCLINE>        ENDLOOP.</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE>      ENDIF.</FPCLINE>
+     </INITIALIZATION>
+     <FORMS/>
+    </CL_FP_CODING>
+   </cls:CL_FP_CODING>
+  </asx:heap>
+ </asx:abap>
+</abapGit>

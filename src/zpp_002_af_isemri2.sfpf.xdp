@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xfa generator="AdobeLiveCycleDesigner_V11.0.9.20230422.1.42_SAP" APIVersion="3.6.23111.0"?><xdp:xdp xmlns:xdp="http://ns.adobe.com/xdp/" timeStamp="2024-05-22T12:04:43Z" uuid="60a744b3-d793-42e7-ab52-bae439ac4d5d">
+<template xmlns:xliff="urn:oasis:names:tc:xliff:document:1.1" xmlns="http://www.xfa.org/schema/xfa-template/3.3/">
+   <?formServer defaultPDFRenderFormat acrobat10.0dynamic?>
+   <?formServer allowRenderCaching 0?>
+   <?formServer formModel both?>
+   <subform layout="tb" locale="tr_TR" name="data" restoreState="auto">
+      <pageSet>
+         <pageArea id="Page1" name="Page1">
+            <contentArea h="206.666mm" id="contentArea_ID" w="203.2mm" x="6.349mm" y="60.001mm"/>
+            <medium long="11in" short="8.5in" stock="letter"/>
+            <subform h="51.985mm" name="Header" w="203.175mm" x="6.667mm" y="3.333mm">
+               <bind match="none"/>
+               <field h="4.682mm" name="BARCODEAUFNR" w="50mm" x="93.334mm" y="15.556mm">
+                  <ui>
+                     <barcode checksum="auto" dataLength="10" textLocation="none" type="code128A" wideNarrowRatio="fixed"/>
+                  </ui>
+                  <font typeface="Courier New"/>
+                  <value>
+                     <text xliff:rid="2B285BD8-8FFA-4A5C-9B44-BB01EC3DF7B9">1234567890</text>
+                  </value>
+                  <bind match="dataRef" ref="$.IS_DATA.AUFNR"/>
+               </field>
+               <field access="readOnly" h="9mm" id="floatingField006334" name="AUFNR" presence="hidden" w="62mm" y="0.001mm">
+                  <ui>
+                     <textEdit>
+                        <border>
+                           <edge stroke="lowered"/>
+                        </border>
+                        <margin/>
+                     </textEdit>
+                  </ui>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                  <para vAlign="middle"/>
+                  <bind match="dataRef" ref="$.IS_DATA.AUFNR"/>
+               </field>
+               <draw h="5.2331mm" name="Text1" w="60mm" x="3.333mm" y="16.667mm">
+                  <ui>
+                     <textEdit/>
+                  </ui>
+                  <value>
+                     <exData contentType="text/html" xliff:rid="1B35CBBD-4221-44D7-AB46-19B9DFBABE19">
+                        <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p>Üretim Sipariş No :<span xfa:embed="#floatingField006334" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                     </exData>
+                  </value>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                  <para vAlign="middle"/>
+               </draw>
+               <field access="readOnly" h="9mm" id="floatingField026500" name="MAKTX" presence="hidden" w="62mm" y="0.001mm">
+                  <ui>
+                     <textEdit>
+                        <border>
+                           <edge stroke="lowered"/>
+                        </border>
+                        <margin/>
+                     </textEdit>
+                  </ui>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                  <para vAlign="middle"/>
+                  <bind match="dataRef" ref="$.IS_DATA.MAKTX"/>
+               </field>
+               <draw h="5.2331mm" name="Text2" w="88.889mm" x="3.333mm" y="21.667mm">
+                  <ui>
+                     <textEdit/>
+                  </ui>
+                  <value>
+                     <exData contentType="text/html" xliff:rid="4387FF91-E079-44A3-898B-2164CD2898B4">
+                        <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="text-decoration:none;letter-spacing:0in">Malzeme Numarası :<span xfa:embed="#floatingField026500" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                     </exData>
+                  </value>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                  <para vAlign="middle"/>
+               </draw>
+               <field h="5.2331mm" name="DateField2" w="50.794mm" x="93.334mm" y="26.667mm">
+                  <ui>
+                     <dateTimeEdit/>
+                  </ui>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                  <value>
+                     <date/>
+                  </value>
+                  <caption>
+                     <value>
+                        <text xliff:rid="BF44376B-4214-4F39-ACFD-66BBB6450BDB">Termin Tarihi :</text>
+                     </value>
+                     <para vAlign="middle"/>
+                  </caption>
+                  <format>
+                     <picture>date{DD/MM/YYYY}</picture>
+                  </format>
+                  <bind match="dataRef" ref="$.IS_DATA.TERMIN"/>
+                  <para vAlign="middle"/>
+               </field>
+               <field access="readOnly" h="9mm" id="floatingField019169" name="ERDAT" presence="hidden" w="62mm" y="0.001mm">
+                  <ui>
+                     <textEdit>
+                        <border>
+                           <edge stroke="lowered"/>
+                        </border>
+                        <margin/>
+                     </textEdit>
+                  </ui>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                  <para vAlign="middle"/>
+                  <bind match="dataRef" ref="$.IS_DATA.ERDAT"/>
+               </field>
+               <field h="5.2331mm" name="DateField1" w="50.794mm" x="93.334mm" y="21.112mm">
+                  <ui>
+                     <dateTimeEdit/>
+                  </ui>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                  <value>
+                     <date/>
+                  </value>
+                  <caption>
+                     <value>
+                        <text xliff:rid="894D8589-8A1D-4FC1-AA9D-8EB6C50C70FE">İş Emri Tarihi :</text>
+                     </value>
+                     <para vAlign="middle"/>
+                  </caption>
+                  <bind match="dataRef" ref="$.IS_DATA.ERDAT"/>
+                  <format>
+                     <picture>date{DD/MM/YYYY}</picture>
+                  </format>
+                  <para vAlign="middle"/>
+               </field>
+               <field access="readOnly" h="9mm" id="floatingField015724" name="LGORT" presence="hidden" w="62mm" x="0mm" y="0mm">
+                  <ui>
+                     <textEdit>
+                        <border>
+                           <edge stroke="lowered"/>
+                        </border>
+                        <margin/>
+                     </textEdit>
+                  </ui>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                  <para vAlign="middle"/>
+                  <bind match="dataRef" ref="$.IS_DATA.LGORT"/>
+               </field>
+               <draw h="5.2331mm" name="Text2" w="88.889mm" x="3.333mm" y="31.667mm">
+                  <ui>
+                     <textEdit/>
+                  </ui>
+                  <value>
+                     <exData contentType="text/html" xliff:rid="0E634904-5048-41D5-A289-99E99530D959">
+                        <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="letter-spacing:0in">Pazar Bilgisi :<span xfa:embed="#floatingField015724" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                     </exData>
+                  </value>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                  <para vAlign="middle"/>
+               </draw>
+               <field access="readOnly" h="9mm" id="floatingField011478" name="MODEL" presence="hidden" w="62mm" x="0mm" y="0mm">
+                  <ui>
+                     <textEdit>
+                        <border>
+                           <edge stroke="lowered"/>
+                        </border>
+                        <margin/>
+                     </textEdit>
+                  </ui>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                  <para vAlign="middle"/>
+                  <bind match="dataRef" ref="$.IS_DATA.MODEL"/>
+               </field>
+               <draw h="5.2331mm" name="Text2" w="88.889mm" x="3.333mm" y="26.667mm">
+                  <ui>
+                     <textEdit/>
+                  </ui>
+                  <value>
+                     <exData contentType="text/html" xliff:rid="B276AF04-152E-477A-9FEE-C47203F6C9B6">
+                        <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="letter-spacing:0in">Model :<span style="xfa-spacerun:yes"> </span><span xfa:embed="#floatingField011478" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                     </exData>
+                  </value>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                  <para vAlign="middle"/>
+               </draw>
+               <field h="30mm" name="ProductPicture" w="31.666mm" x="170.001mm" y="18.334mm">
+                  <ui>
+                     <imageEdit data="embed"/>
+                  </ui>
+                  <caption placement="bottom" reserve="1.8453mm">
+                     <font typeface="Arial"/>
+                     <para vAlign="middle"/>
+                  </caption>
+                  <bind match="dataRef" ref="$.IMAGE_SHOE"/>
+                  <value>
+                     <image contentType="application/octet-stream"/>
+                  </value>
+                  <desc>
+                     <text name="embeddedHref">Unknown Embedded URI</text>
+                  </desc>
+               </field>
+               <field h="13.81mm" name="ImageField1" w="23.969mm" x="3.333mm" y="1.667mm">
+                  <ui>
+                     <imageEdit/>
+                  </ui>
+                  <caption placement="bottom" reserve="0.9299mm">
+                     <font typeface="Arial"/>
+                     <para vAlign="middle"/>
+                  </caption>
+                  <bind match="dataRef" ref="$.EREN"/>
+               </field>
+               <field h="12.461mm" name="BRAND_IMAGE" w="31.506mm" x="170.001mm" y="3.334mm">
+                  <ui>
+                     <imageEdit/>
+                  </ui>
+                  <caption placement="bottom" reserve="1.5402mm">
+                     <font typeface="Arial"/>
+                     <para vAlign="middle"/>
+                  </caption>
+                  <bind match="dataRef" ref="$.BRAND_IMAGE"/>
+                  <desc>
+                     <exData name="Schema Annotation">Grafik düğümü GRAPHIC
+URL-FIELD = IV_BRAND</exData>
+                  </desc>
+               </field>
+               <subform columnWidths="16.373mm" layout="table" name="Table1" x="47.778mm" y="37.778mm">
+                  <border>
+                     <edge/>
+                  </border>
+                  <subform layout="row" name="Row1" x="0mm">
+                     <assist role="TR"/>
+                     <field access="readOnly" h="9mm" id="floatingField026962" name="ATWTB" presence="hidden" w="62mm" x="0mm" y="0mm">
+                        <ui>
+                           <textEdit>
+                              <border>
+                                 <edge stroke="lowered"/>
+                              </border>
+                              <margin/>
+                           </textEdit>
+                        </ui>
+                        <font typeface="Arial"/>
+                        <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                        <para vAlign="middle"/>
+                        <bind match="dataRef" ref="$.IS_DATA.ATWTB"/>
+                        <event activity="initialize" name="event__initialize">
+                           <script contentType="application/x-javascript">Row1.ATWTB.fillColor = "158,234,242";
+
+</script>
+                        </event>
+                     </field>
+                     <draw h="5.36mm" name="Cell1">
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <value>
+                           <exData contentType="text/html">
+                              <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="letter-spacing:0in"><span xfa:embed="#floatingField026962" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                           </exData>
+                        </value>
+                        <font baselineShift="0pt" typeface="Arial" weight="bold"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para hAlign="center" marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="middle"/>
+                     </draw>
+                     <border>
+                        <edge presence="hidden"/>
+                     </border>
+                     <bind match="none"/>
+                     <?templateDesigner expand 1?></subform>
+                  <subform layout="row" name="Row2" x="0mm">
+                     <assist role="TR"/>
+                     <field access="readOnly" h="9mm" id="floatingField005705" name="GAMNG" presence="hidden" w="62mm" x="0mm" y="0mm">
+                        <ui>
+                           <textEdit>
+                              <border>
+                                 <edge stroke="lowered"/>
+                              </border>
+                              <margin/>
+                           </textEdit>
+                        </ui>
+                        <font typeface="Arial"/>
+                        <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                        <para vAlign="middle"/>
+                        <bind match="dataRef" ref="$.IS_DATA.GAMNG"/>
+                     </field>
+                     <draw h="6.633mm" name="Cell1">
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <font baselineShift="0pt" size="9pt" typeface="Arial"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="middle"/>
+                        <value>
+                           <exData contentType="text/html">
+                              <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="letter-spacing:0in"><span xfa:embed="#floatingField005705" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                           </exData>
+                        </value>
+                     </draw>
+                     <border>
+                        <edge presence="hidden"/>
+                     </border>
+                     <bind match="none"/>
+                     <?templateDesigner expand 1?></subform>
+                  <bind match="none"/>
+                  <?templateDesigner rowpattern first:1, next:1, firstcolor:f0f0f0, nextcolor:ffffff, apply:0?>
+                  <?templateDesigner expand 1?></subform>
+               <subform columnWidths="44.307mm" layout="table" name="Table2" x="3.333mm" y="43.334mm">
+                  <border>
+                     <edge/>
+                  </border>
+                  <subform layout="row" name="Row1" x="0mm" y="0mm">
+                     <assist role="TR"/>
+                     <field access="readOnly" h="9mm" id="floatingField029358" name="RENK" presence="hidden" w="62mm" x="0mm" y="0mm">
+                        <ui>
+                           <textEdit>
+                              <border>
+                                 <edge stroke="lowered"/>
+                              </border>
+                              <margin/>
+                           </textEdit>
+                        </ui>
+                        <font typeface="Arial"/>
+                        <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                        <para vAlign="middle"/>
+                        <bind match="dataRef" ref="$.IS_DATA.RENK"/>
+                        <event activity="initialize" name="event__initialize">
+                           <script contentType="application/x-javascript">Row1.RENK.fillColor = "158,234,242";
+
+</script>
+                        </event>
+                     </field>
+                     <draw h="6.493mm" name="Cell1" w="1.181097in">
+                        <border>
+                           <edge/>
+                           <corner thickness="0.1778mm"/>
+                        </border>
+                        <ui>
+                           <textEdit/>
+                        </ui>
+                        <value>
+                           <exData contentType="text/html">
+                              <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="text-decoration:none;letter-spacing:0in"><span xfa:embed="#floatingField029358" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                           </exData>
+                        </value>
+                        <font baselineShift="0pt" typeface="Arial" weight="bold"/>
+                        <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                        <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="middle"/>
+                     </draw>
+                     <border>
+                        <edge presence="hidden"/>
+                     </border>
+                     <bind match="none"/>
+                     <?templateDesigner expand 1?></subform>
+                  <bind match="none"/>
+                  <?templateDesigner rowpattern first:1, next:1, firstcolor:f0f0f0, nextcolor:ffffff, apply:0?>
+                  <?templateDesigner expand 1?></subform>
+               <?templateDesigner expand 1?></subform>
+            <subform h="5.132mm" name="Baslıklar" w="203.288mm" x="6.985mm" y="55.318mm">
+               <bind match="none"/>
+               <draw h="4.699mm" name="Text3" w="57.143mm" x="0.201mm" y="0.132mm">
+                  <ui>
+                     <textEdit/>
+                  </ui>
+                  <value>
+                     <text xliff:rid="3FF430DA-3279-4633-B803-5B0E3FFFEE6D"> HAMMADDE ADI</text>
+                  </value>
+                  <font baselineShift="0pt" size="9pt" typeface="Arial"/>
+                  <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                  <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="bottom"/>
+               </draw>
+               <draw h="4.699mm" name="Text3" w="53.968mm" x="56.868mm" y="0.132mm">
+                  <ui>
+                     <textEdit/>
+                  </ui>
+                  <value>
+                     <text xliff:rid="E0A63763-550A-460A-9594-8EA1410B8C41">           PARÇA AÇIKLAMASI</text>
+                  </value>
+                  <font baselineShift="0pt" size="9pt" typeface="Arial"/>
+                  <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                  <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="bottom"/>
+               </draw>
+               <draw h="4.699mm" name="Text3" w="44.445mm" x="110.202mm" y="0.132mm">
+                  <ui>
+                     <textEdit/>
+                  </ui>
+                  <value>
+                     <text xliff:rid="389B3C92-4F40-4E4F-AD7C-E2E9DA864FE4">       RENK</text>
+                  </value>
+                  <font baselineShift="0pt" size="9pt" typeface="Arial"/>
+                  <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                  <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="bottom"/>
+               </draw>
+               <draw h="4.699mm" name="Text3" w="25.397mm" x="155.202mm" y="0.132mm">
+                  <ui>
+                     <textEdit/>
+                  </ui>
+                  <value>
+                     <text xliff:rid="86F3647F-1F5A-49FC-8118-8B19B32C8B98">MİKTAR</text>
+                  </value>
+                  <font baselineShift="0pt" size="9pt" typeface="Arial"/>
+                  <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                  <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="bottom"/>
+               </draw>
+               <draw h="4.699mm" name="Text3" w="22.223mm" x="180.202mm" y="0.132mm">
+                  <ui>
+                     <textEdit/>
+                  </ui>
+                  <value>
+                     <text xliff:rid="D3BE9DD9-7769-44CA-83C2-3DF3721D1D68">BİRİM</text>
+                  </value>
+                  <font baselineShift="0pt" size="9pt" typeface="Arial"/>
+                  <margin bottomInset="0.5mm" leftInset="0.5mm" rightInset="0.5mm" topInset="0.5mm"/>
+                  <para marginLeft="0pt" marginRight="0pt" spaceAbove="0pt" spaceBelow="0pt" textIndent="0pt" vAlign="bottom"/>
+               </draw>
+               <?templateDesigner expand 1?></subform>
+            <subform h="7.421mm" name="Footer" w="202.905mm" x="6.667mm" y="266.669mm">
+               <bind match="none"/>
+               <draw h="3.528mm" name="Pages" w="16.157mm" x="181.092mm" y="3.209mm">
+                  <ui>
+                     <textEdit>
+                        <margin/>
+                     </textEdit>
+                  </ui>
+                  <value>
+                     <exData contentType="text/html" maxLength="0" xliff:rid="D5360569-E101-4DB6-A432-A126FB0A2FE5">
+                        <body xmlns="http://www.w3.org/1999/xhtml" xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/"><p style="text-decoration:none;letter-spacing:0in"><span style="xfa-spacerun:yes"> </span><span xfa:embed="#floatingField000041" xfa:embedMode="raw" xfa:embedType="uri"/> /<span style="xfa-spacerun:yes"> </span><span xfa:embed="#floatingField018467" xfa:embedMode="raw" xfa:embedType="uri"/></p></body>
+                     </exData>
+                  </value>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="0mm" leftInset="0mm" rightInset="0mm" topInset="0mm"/>
+                  <para hAlign="center" vAlign="middle"/>
+               </draw>
+               <field access="readOnly" h="7.5mm" id="floatingField000041" name="CurrentPage" presence="hidden" w="55mm" x="101.717mm" y="0.034mm">
+                  <ui>
+                     <numericEdit>
+                        <border>
+                           <edge stroke="lowered"/>
+                        </border>
+                        <margin/>
+                     </numericEdit>
+                  </ui>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                  <para hAlign="center" vAlign="middle"/>
+                  <caption reserve="20mm">
+                     <para hAlign="center" vAlign="middle"/>
+                     <value>
+                        <text xliff:rid="3839E3EB-4717-4420-8039-67EBDFAEB0A4">Text Field</text>
+                     </value>
+                  </caption>
+                  <calculate override="error"/>
+                  <event activity="ready" name="event__layout_ready" ref="$layout">
+                     <script contentType="application/x-javascript">this.rawValue = xfa.layout.page(this);
+</script>
+                  </event>
+                  <?templateDesigner floatingFieldPlaceholder #?>
+                  <bind match="none"/>
+               </field>
+               <field access="readOnly" h="7.5mm" id="floatingField018467" name="PageCount" presence="hidden" w="55mm" x="101.717mm" y="0.034mm">
+                  <ui>
+                     <numericEdit>
+                        <border>
+                           <edge stroke="lowered"/>
+                        </border>
+                        <margin/>
+                     </numericEdit>
+                  </ui>
+                  <font typeface="Arial"/>
+                  <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                  <para hAlign="center" vAlign="middle"/>
+                  <caption reserve="20mm">
+                     <para hAlign="center" vAlign="middle"/>
+                     <value>
+                        <text xliff:rid="3F1F1F4C-DA0A-4087-9062-853D3867D6B5">Text Field</text>
+                     </value>
+                  </caption>
+                  <calculate override="error"/>
+                  <event activity="ready" name="event__layout_ready" ref="$layout">
+                     <script contentType="application/x-javascript">this.rawValue = xfa.layout.pageCount();
+</script>
+                  </event>
+                  <?templateDesigner floatingFieldPlaceholder ##?>
+                  <bind match="none"/>
+               </field>
+               <?templateDesigner expand 1?></subform>
+            <?templateDesigner expand 1?></pageArea>
+         <?templateDesigner expand 1?></pageSet>
+      <subform layout="tb" name="DEEP" w="203.41mm">
+         <occur max="-1"/>
+         <subform layout="tb" name="Table" w="203.288mm">
+            <bind match="dataRef" ref="$record.IT_TABLE"/>
+            <subform layout="tb" name="Body" w="203.288mm">
+               <bind match="dataRef" ref="$.DATA[*]"/>
+               <field h="6.349mm" name="LTXA1" w="203.175mm">
+                  <ui>
+                     <textEdit>
+                        <border>
+                           <edge stroke="lowered"/>
+                        </border>
+                        <margin/>
+                     </textEdit>
+                  </ui>
+                  <font size="8pt" typeface="Arial" weight="bold"/>
+                  <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                  <para vAlign="bottom"/>
+                  <caption reserve="0.01in">
+                     <para vAlign="bottom"/>
+                     <value>
+                        <text xliff:rid="26B46EE0-91B6-4B55-9189-3B4EFD1D5255"/>
+                     </value>
+                  </caption>
+                  <value>
+                     <text maxChars="40"/>
+                  </value>
+                  <bind match="dataRef" ref="$.LTXA1"/>
+                  <desc>
+                     <text name="Schema Annotation">İşlem kısa metni</text>
+                  </desc>
+                  <event activity="initialize" name="event__initialize">
+                     <script contentType="application/x-javascript">Body.LTXA1.fillColor = "192,192,192";
+
+</script>
+                  </event>
+               </field>
+               <subform columnWidths="67.733mm 48.267mm 38.107mm 25.529mm 22.754mm" layout="table" name="TABLE">
+                  <subformSet>
+                     <subform layout="row" name="DATA">
+                        <field h="4.445mm" name="MAKTX" w="62mm">
+                           <ui>
+                              <textEdit>
+                                 <margin/>
+                              </textEdit>
+                           </ui>
+                           <font size="8pt" typeface="Arial"/>
+                           <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                           <para vAlign="bottom"/>
+                           <value>
+                              <text maxChars="40"/>
+                           </value>
+                           <bind match="dataRef" ref="$.MAKTX"/>
+                           <desc>
+                              <text name="Schema Annotation">Malzeme kısa metni</text>
+                           </desc>
+                           <border>
+                              <edge/>
+                           </border>
+                        </field>
+                        <field h="4.445mm" name="DESCRIPTION" w="62mm" x="2.440944in">
+                           <ui>
+                              <textEdit>
+                                 <margin/>
+                              </textEdit>
+                           </ui>
+                           <font size="8pt" typeface="Arial"/>
+                           <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                           <para vAlign="bottom"/>
+                           <value>
+                              <text maxChars="200"/>
+                           </value>
+                           <bind match="dataRef" ref="$.DESCRIPTION"/>
+                           <desc>
+                              <text name="Schema Annotation">Parça Açıklama</text>
+                           </desc>
+                           <border>
+                              <edge/>
+                           </border>
+                        </field>
+                        <field h="4.445mm" name="COLOR" w="62mm" x="4.881889in">
+                           <ui>
+                              <textEdit>
+                                 <margin/>
+                              </textEdit>
+                           </ui>
+                           <font size="8pt" typeface="Arial"/>
+                           <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                           <para vAlign="bottom"/>
+                           <value>
+                              <text maxChars="200"/>
+                           </value>
+                           <bind match="dataRef" ref="$.COLOR"/>
+                           <desc>
+                              <text name="Schema Annotation">Renk</text>
+                           </desc>
+                           <border>
+                              <edge/>
+                           </border>
+                        </field>
+                        <field h="4.445mm" name="BDMNG" w="62mm" y="0.354333in">
+                           <ui>
+                              <numericEdit>
+                                 <margin/>
+                              </numericEdit>
+                           </ui>
+                           <font size="8pt" typeface="Arial"/>
+                           <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                           <para vAlign="bottom"/>
+                           <value>
+                              <decimal fracDigits="3" leadDigits="10"/>
+                           </value>
+                           <bind match="dataRef" ref="$.BDMNG"/>
+                           <desc>
+                              <text name="Schema Annotation">İhtiyaç miktarı</text>
+                           </desc>
+                           <validate nullTest="error"/>
+                           <border>
+                              <edge/>
+                           </border>
+                           <format>
+                              <picture>zero{}</picture>
+                           </format>
+                        </field>
+                        <field h="4.445mm" name="MEINS" w="62mm" x="2.440944in" y="0.354333in">
+                           <ui>
+                              <textEdit>
+                                 <margin/>
+                              </textEdit>
+                           </ui>
+                           <font size="8pt" typeface="Arial"/>
+                           <margin bottomInset="1mm" leftInset="1mm" rightInset="1mm" topInset="1mm"/>
+                           <para vAlign="bottom"/>
+                           <value>
+                              <text maxChars="3"/>
+                           </value>
+                           <bind match="dataRef" ref="$.MEINS"/>
+                           <desc>
+                              <text name="Schema Annotation">Temel ölçü birimi</text>
+                           </desc>
+                           <border>
+                              <edge/>
+                           </border>
+                        </field>
+                        <assist role="TR"/>
+                        <occur max="-1"/>
+                        <bind match="dataRef" ref="$.DATA[*]"/>
+                        <?templateDesigner expand 1?></subform>
+                     <?templateDesigner expand 1?></subformSet>
+                  <occur min="0"/>
+                  <bind match="dataRef" ref="$.TABLE"/>
+                  <desc>
+                     <text name="Schema Annotation">İş Emri 2 Çıktısı Tablo için Table Type</text>
+                  </desc>
+                  <keep intact="contentArea"/>
+                  <overflow leader="overflowLeader"/>
+                  <?templateDesigner expand 1?></subform>
+               <breakBefore target="Page1.#contentArea" targetType="contentArea"/>
+               <occur max="-1"/>
+               <assist role="TR"/>
+               <?templateDesigner expand 1?></subform>
+            <breakBefore target="Page1.#contentArea" targetType="contentArea"/>
+            <occur max="-1"/>
+            <assist role="Table"/>
+            <?templateDesigner expand 1?></subform>
+         <overflow target="Page1.#contentArea"/>
+         <breakBefore target="Page1.#contentArea" targetType="contentArea"/>
+         <?templateDesigner expand 1?></subform>
+      <proto/>
+      <desc>
+         <text name="version">11.0.9.20230422.1.42.2</text>
+      </desc>
+      <?templateDesigner Hyphenation excludeInitialCap:1, excludeAllCaps:1, wordCharCnt:7, remainCharCnt:3, pushCharCnt:3?>
+      <?templateDesigner expand 1?>
+      <?renderCache.subset "Arial" 0 0 UTF-16 2 188 000300060012001D00240025002700280029002A002B002C002E002F00300031003200330035003600370038003B004400470048004A004B004C004F00500051005200530055005600570058005B005D005E00600064006800D500F800FA?>
+      <?renderCache.subset "Arial" 1 0 UTF-16 2 40 002400250028002E003100350037003A005E0060?>
+      <?renderCache.subset "Courier New" 0 0 UTF-16 2 40 0013001400150016001700180019001A001B001C?></subform>
+   <?templateDesigner DefaultPreviewDynamic 1?>
+   <?templateDesigner WidowOrphanControl 0?>
+   <?originalXFAVersion http://www.xfa.org/schema/xfa-template/3.3/?>
+   <?templateDesigner DefaultLanguage JavaScript?>
+   <?templateDesigner DefaultRunAt client?>
+   <?acrobat JavaScript strictScoping?>
+   <?PDFPrintOptions embedViewerPrefs 0?>
+   <?PDFPrintOptions embedPrintOnFormOpen 0?>
+   <?PDFPrintOptions scalingPrefs 0?>
+   <?PDFPrintOptions enforceScalingPrefs 0?>
+   <?PDFPrintOptions paperSource 0?>
+   <?PDFPrintOptions duplexMode 0?>
+   <?templateDesigner DefaultPreviewType interactive?>
+   <?templateDesigner DefaultPreviewPagination simplex?>
+   <?templateDesigner XDPPreviewFormat 20?>
+   <?templateDesigner DefaultCaptionFontSettings face:Arial;size:10;weight:normal;style:normal?>
+   <?templateDesigner DefaultValueFontSettings face:Arial;size:10;weight:normal;style:normal?>
+   <?templateDesigner SaveTaggedPDF 1?>
+   <?templateDesigner SavePDFWithEmbeddedFonts 1?>
+   <?templateDesigner Grid show:1, snap:1, units:1, color:ff8080, origin:(0,0), interval:(27778,27778), objsnap:0, guidesnap:0, pagecentersnap:0?>
+   <?templateDesigner FormTargetVersion 33?>
+   <?templateDesigner Rulers horizontal:1, vertical:1, guidelines:1, crosshairs:0?>
+   <?templateDesigner Zoom 74?></template>
+<config xmlns="http://www.xfa.org/schema/xci/3.0/">
+   <agent name="designer">
+      <!--  [0..n]  -->
+      <destination>pdf</destination>
+      <pdf>
+         <!--  [0..n]  -->
+         <fontInfo/>
+      </pdf>
+      <common>
+         <template>
+            <base>https://vkts42022faa.vektora.local:8443/sap/bc/fp/form/layout/</base>
+         </template>
+      </common>
+   </agent>
+   <present>
+      <!--  [0..n]  -->
+      <pdf>
+         <!--  [0..n]  -->
+         <version>1.7</version>
+         <adobeExtensionLevel>8</adobeExtensionLevel>
+      </pdf>
+      <common>
+         <data>
+            <xsl>
+               <uri/>
+            </xsl>
+            <outputXSL>
+               <uri/>
+            </outputXSL>
+         </data>
+      </common>
+      <xdp>
+         <packets>*</packets>
+      </xdp>
+   </present>
+</config>
+<connectionSet xmlns="http://www.xfa.org/schema/xfa-connection-set/2.8/">
+   <xsdConnection dataDescription="data" name="ZPP_002_AF_ISEMRI2">
+      <uri/>
+      <rootElement>data</rootElement>
+   </xsdConnection>
+</connectionSet>
+<xfa:datasets xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/">
+   <xfa:data xfa:dataNode="dataGroup"/>
+   <dd:dataDescription xmlns:dd="http://ns.adobe.com/data-description/" dd:name="data">
+      <data>
+         <IT_TABLE dd:minOccur="0">
+            <DATA dd:maxOccur="-1">
+               <LTXA1/>
+               <TABLE dd:minOccur="0">
+                  <DATA dd:maxOccur="-1">
+                     <MAKTX/>
+                     <DESCRIPTION/>
+                     <COLOR/>
+                     <BDMNG/>
+                     <MEINS/>
+                  </DATA>
+               </TABLE>
+            </DATA>
+         </IT_TABLE>
+         <EREN/>
+         <IV_BRAND/>
+         <BRAND_IMAGE/>
+         <IV_IMAGE/>
+         <IMAGE_SHOE/>
+         <IS_DATA>
+            <AUFNR/>
+            <MAKTX/>
+            <ERDAT/>
+            <LGORT/>
+            <MODEL/>
+            <BRAND/>
+            <TERMIN/>
+            <RENK/>
+            <ATWTB/>
+            <GAMNG/>
+            <GMEIN/>
+         </IS_DATA>
+      </data>
+   </dd:dataDescription>
+</xfa:datasets>
+<localeSet xmlns="http://www.xfa.org/schema/xfa-locale-set/2.7/">
+   <locale desc="Türkçe (Türkiye)" name="tr_TR">
+      <calendarSymbols name="gregorian">
+         <monthNames>
+            <month>Ocak</month>
+            <month>Şubat</month>
+            <month>Mart</month>
+            <month>Nisan</month>
+            <month>Mayıs</month>
+            <month>Haziran</month>
+            <month>Temmuz</month>
+            <month>Ağustos</month>
+            <month>Eylül</month>
+            <month>Ekim</month>
+            <month>Kasım</month>
+            <month>Aralık</month>
+         </monthNames>
+         <monthNames abbr="1">
+            <month>Oca</month>
+            <month>Şub</month>
+            <month>Mar</month>
+            <month>Nis</month>
+            <month>May</month>
+            <month>Haz</month>
+            <month>Tem</month>
+            <month>Ağu</month>
+            <month>Eyl</month>
+            <month>Eki</month>
+            <month>Kas</month>
+            <month>Ara</month>
+         </monthNames>
+         <dayNames>
+            <day>Pazar</day>
+            <day>Pazartesi</day>
+            <day>Salı</day>
+            <day>Çarşamba</day>
+            <day>Perşembe</day>
+            <day>Cuma</day>
+            <day>Cumartesi</day>
+         </dayNames>
+         <dayNames abbr="1">
+            <day>Paz</day>
+            <day>Pzt</day>
+            <day>Sal</day>
+            <day>Çar</day>
+            <day>Per</day>
+            <day>Cum</day>
+            <day>Cmt</day>
+         </dayNames>
+         <meridiemNames>
+            <meridiem>AM</meridiem>
+            <meridiem>PM</meridiem>
+         </meridiemNames>
+         <eraNames>
+            <era>BC</era>
+            <era>AD</era>
+         </eraNames>
+      </calendarSymbols>
+      <datePatterns>
+         <datePattern name="full">DD MMMM YYYY EEEE</datePattern>
+         <datePattern name="long">DD MMMM YYYY EEEE</datePattern>
+         <datePattern name="med">DD.MMM.YYYY</datePattern>
+         <datePattern name="short">DD.MM.YYYY</datePattern>
+      </datePatterns>
+      <timePatterns>
+         <timePattern name="full">HH:MM:SS Z</timePattern>
+         <timePattern name="long">HH:MM:SS Z</timePattern>
+         <timePattern name="med">HH:MM:SS</timePattern>
+         <timePattern name="short">HH:MM</timePattern>
+      </timePatterns>
+      <dateTimeSymbols>GanjkHmsSEDFwWxhKzZ</dateTimeSymbols>
+      <numberPatterns>
+         <numberPattern name="numeric">z,zz9.zzz</numberPattern>
+         <numberPattern name="currency">z,zz9 $</numberPattern>
+         <numberPattern name="percent">z,zz9%</numberPattern>
+      </numberPatterns>
+      <numberSymbols>
+         <numberSymbol name="decimal">,</numberSymbol>
+         <numberSymbol name="grouping">.</numberSymbol>
+         <numberSymbol name="percent">%</numberSymbol>
+         <numberSymbol name="minus">-</numberSymbol>
+         <numberSymbol name="zero">0</numberSymbol>
+      </numberSymbols>
+      <currencySymbols>
+         <currencySymbol name="symbol">TL</currencySymbol>
+         <currencySymbol name="isoname">TRL</currencySymbol>
+         <currencySymbol name="decimal">,</currencySymbol>
+      </currencySymbols>
+      <typefaces>
+         <typeface name="Myriad Pro"/>
+         <typeface name="Minion Pro"/>
+         <typeface name="Courier Std"/>
+         <typeface name="Adobe Pi Std"/>
+         <typeface name="Adobe Hebrew"/>
+         <typeface name="Adobe Arabic"/>
+         <typeface name="Adobe Thai"/>
+         <typeface name="Kozuka Gothic Pro-VI M"/>
+         <typeface name="Kozuka Mincho Pro-VI R"/>
+         <typeface name="Adobe Ming Std L"/>
+         <typeface name="Adobe Song Std L"/>
+         <typeface name="Adobe Myungjo Std M"/>
+         <typeface name="Adobe Devanagari"/>
+      </typefaces>
+   </locale>
+</localeSet>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 9.0-c000 79.cca54b0, 2022/11/26-09:29:55        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:pdfuaid="http://www.aiim.org/pdfua/ns/id/" xmlns:pdf="http://ns.adobe.com/pdf/1.3/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:desc="http://ns.adobe.com/xfa/promoted-desc/" rdf:about="">
+         <xmp:MetadataDate>2024-05-22T12:04:43Z</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe LiveCycle Designer 11.0</xmp:CreatorTool>
+         <pdfuaid:part>1</pdfuaid:part>
+         <pdf:Producer>Adobe LiveCycle Designer 11.0</pdf:Producer>
+         <xmpMM:DocumentID>uuid:60a744b3-d793-42e7-ab52-bae439ac4d5d</xmpMM:DocumentID>
+         <desc:version rdf:parseType="Resource">
+            <rdf:value>11.0.9.20230422.1.42.2</rdf:value>
+            <desc:ref>/template/subform[1]</desc:ref>
+         </desc:version>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta></xdp:xdp>

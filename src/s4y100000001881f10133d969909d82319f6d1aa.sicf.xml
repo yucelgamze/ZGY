@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SICF" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <URL>/sap/opu/odata/sap/S4Y100000001881/</URL>
+   <ICFSERVICE>
+    <ICF_NAME>S4Y100000001881</ICF_NAME>
+    <ORIG_NAME>S4Y100000001881</ORIG_NAME>
+    <ICFALTNME>ZGY_TABLET_V2_SRV</ICFALTNME>
+    <ICFALTNME_ORIG>zgy_tablet_v2_srv</ICFALTNME_ORIG>
+   </ICFSERVICE>
+   <ICFDOCU>
+    <ICF_NAME>S4Y100000001881</ICF_NAME>
+    <ICF_LANGU>T</ICF_LANGU>
+    <ICF_DOCU>ZGY_TABLET_V2_SRV</ICF_DOCU>
+   </ICFDOCU>
+   <ICFHANDLER_TABLE>
+    <ICFHANDLER>
+     <ICF_NAME>S4Y100000001881</ICF_NAME>
+     <ICFORDER>01</ICFORDER>
+     <ICFTYP>A</ICFTYP>
+     <ICFHANDLER>/IWFND/CL_SODATA_HTTP_HANDLER</ICFHANDLER>
+    </ICFHANDLER>
+   </ICFHANDLER_TABLE>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SFPI" serializer_version="v1.0.0">
+ <asx:abap version="1.0" xmlns:asx="http://www.sap.com/abapxml">
+  <asx:values>
+   <VERSION>1</VERSION>
+   <TYPE/>
+   <INTERFACE href="#o1"/>
+   <INTERFACET>
+    <FPINTERFACET>
+     <NAME/>
+     <STATE/>
+     <LANGUAGE>T</LANGUAGE>
+     <ID/>
+     <TEXT>Eren Tekstil İplik Depo Giriş Etiketi</TEXT>
+    </FPINTERFACET>
+   </INTERFACET>
+  </asx:values>
+  <asx:heap xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:abap="http://www.sap.com/abapxml/types/built-in" xmlns:cls="http://www.sap.com/abapxml/classes/global" xmlns:dic="http://www.sap.com/abapxml/types/dictionary">
+   <cls:CL_FP_INTERFACE_DATA id="o1">
+    <CL_FP_INTERFACE_DATA classVersion="1">
+     <CODING href="#o5"/>
+     <PARAMETERS href="#o4"/>
+     <GLOBAL_DEFINITIONS href="#o3"/>
+     <REFERENCE_FIELDS href="#o2"/>
+     <XSD_DEFINITIONS/>
+    </CL_FP_INTERFACE_DATA>
+   </cls:CL_FP_INTERFACE_DATA>
+   <cls:CL_FP_REFERENCE_FIELDS id="o2">
+    <CL_FP_INTERFACE_DATA_CHANGED classVersion="1">
+     <INTERFACE_DATA href="#o1"/>
+    </CL_FP_INTERFACE_DATA_CHANGED>
+    <CL_FP_REFERENCE_FIELDS classVersion="1">
+     <REFERENCE_FIELDS>
+      <SFPREF>
+       <ACTIVE/>
+       <STANDARD/>
+       <DATATYPE>QUAN</DATATYPE>
+       <VALUE>IS_DATA-ERFMG</VALUE>
+       <UNIT>IS_DATA-ERFME</UNIT>
+      </SFPREF>
+      <SFPREF>
+       <ACTIVE/>
+       <STANDARD/>
+       <DATATYPE>QUAN</DATATYPE>
+       <VALUE>IS_DATA-NTGEW</VALUE>
+       <UNIT>IS_DATA-GEWEI</UNIT>
+      </SFPREF>
+      <SFPREF>
+       <ACTIVE/>
+       <STANDARD/>
+       <DATATYPE>QUAN</DATATYPE>
+       <VALUE>IS_DATA-BRGEW</VALUE>
+       <UNIT>IS_DATA-GEWEI</UNIT>
+      </SFPREF>
+     </REFERENCE_FIELDS>
+    </CL_FP_REFERENCE_FIELDS>
+   </cls:CL_FP_REFERENCE_FIELDS>
+   <cls:CL_FP_GLOBAL_DEFINITIONS id="o3">
+    <CL_FP_INTERFACE_DATA_CHANGED classVersion="1">
+     <INTERFACE_DATA href="#o1"/>
+    </CL_FP_INTERFACE_DATA_CHANGED>
+    <CL_FP_GLOBAL_DEFINITIONS classVersion="1">
+     <GLOBAL_DATA>
+      <SFPGDATA>
+       <NAME>IS_DATA</NAME>
+       <TYPING>TYPE</TYPING>
+       <TYPENAME>ZMM_006_S_BALYA</TYPENAME>
+       <DEFAULTVAL/>
+       <CONSTANT/>
+      </SFPGDATA>
+     </GLOBAL_DATA>
+     <TYPES/>
+     <FIELDSYMBOLS/>
+    </CL_FP_GLOBAL_DEFINITIONS>
+   </cls:CL_FP_GLOBAL_DEFINITIONS>
+   <cls:CL_FP_PARAMETERS id="o4">
+    <CL_FP_INTERFACE_DATA_CHANGED classVersion="1">
+     <INTERFACE_DATA href="#o1"/>
+    </CL_FP_INTERFACE_DATA_CHANGED>
+    <CL_FP_PARAMETERS classVersion="1">
+     <IMPORT_PARAMETERS>
+      <SFPIOPAR>
+       <NAME>IV_MBLNR</NAME>
+       <TYPING>TYPE</TYPING>
+       <TYPENAME>MBLNR</TYPENAME>
+       <OPTIONAL>X</OPTIONAL>
+       <BYVALUE>X</BYVALUE>
+       <DEFAULTVAL/>
+       <STANDARD/>
+       <CONSTANT/>
+      </SFPIOPAR>
+     </IMPORT_PARAMETERS>
+     <EXPORT_PARAMETERS/>
+     <TABLE_PARAMETERS/>
+     <EXCEPTIONS/>
+    </CL_FP_PARAMETERS>
+   </cls:CL_FP_PARAMETERS>
+   <cls:CL_FP_CODING id="o5">
+    <CL_FP_INTERFACE_DATA_CHANGED classVersion="1">
+     <INTERFACE_DATA href="#o1"/>
+    </CL_FP_INTERFACE_DATA_CHANGED>
+    <CL_FP_CODING classVersion="1">
+     <INPUT_PARAMETERS>
+      <FPPARAMETER>IS_DATA</FPPARAMETER>
+     </INPUT_PARAMETERS>
+     <OUTPUT_PARAMETERS>
+      <FPPARAMETER>IS_DATA</FPPARAMETER>
+     </OUTPUT_PARAMETERS>
+     <INITIALIZATION>
+      <FPCLINE> DATA:lv_concat TYPE char28.</FPCLINE>
+      <FPCLINE> DATA:lv_objectkey       TYPE bapi1003_key-object,</FPCLINE>
+      <FPCLINE>      lt_allocvaluesnum  TYPE TABLE OF  bapi1003_alloc_values_num,</FPCLINE>
+      <FPCLINE>      lt_allocvalueschar TYPE TABLE OF  bapi1003_alloc_values_char,</FPCLINE>
+      <FPCLINE>      lt_allocvaluescurr TYPE TABLE OF bapi1003_alloc_values_curr,</FPCLINE>
+      <FPCLINE>      lt_return          TYPE TABLE OF bapiret2,</FPCLINE>
+      <FPCLINE>      ls_return          TYPE bapiret2.</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE> SELECT</FPCLINE>
+      <FPCLINE> mseg~mblnr,</FPCLINE>
+      <FPCLINE> lfa1~lifnr,</FPCLINE>
+      <FPCLINE> lfa1~name1,</FPCLINE>
+      <FPCLINE> makt~maktx,</FPCLINE>
+      <FPCLINE> makt~spras,</FPCLINE>
+      <FPCLINE> mkpf~xblnr,</FPCLINE>
+      <FPCLINE> mkpf~cpudt,</FPCLINE>
+      <FPCLINE> mseg~erfmg,</FPCLINE>
+      <FPCLINE> mseg~charg,</FPCLINE>
+      <FPCLINE> mara~ntgew,</FPCLINE>
+      <FPCLINE> mara~brgew,</FPCLINE>
+      <FPCLINE> mseg~bwart,</FPCLINE>
+      <FPCLINE> mseg~matnr</FPCLINE>
+      <FPCLINE> FROM mseg</FPCLINE>
+      <FPCLINE> INNER JOIN mkpf ON mseg~mblnr = mkpf~mblnr</FPCLINE>
+      <FPCLINE> LEFT  JOIN lfa1 ON mseg~lifnr = lfa1~lifnr</FPCLINE>
+      <FPCLINE> INNER JOIN mara ON mseg~matnr = mara~matnr</FPCLINE>
+      <FPCLINE> LEFT  JOIN makt ON mara~matnr = makt~matnr</FPCLINE>
+      <FPCLINE> WHERE makt~spras = &apos;T&apos;</FPCLINE>
+      <FPCLINE> AND   mseg~mblnr = @iv_mblnr</FPCLINE>
+      <FPCLINE> AND   mseg~bwart = &apos;101&apos;</FPCLINE>
+      <FPCLINE> INTO TABLE @DATA(lt_data).</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE> DELETE ADJACENT DUPLICATES FROM lt_data COMPARING mblnr.</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE> LOOP AT lt_data INTO DATA(ls_data).</FPCLINE>
+      <FPCLINE>   DATA(lv_matnr) = ls_data-matnr.</FPCLINE>
+      <FPCLINE>   DATA(lv_charg) = ls_data-charg.</FPCLINE>
+      <FPCLINE> ENDLOOP.</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE> lv_charg = |{ lv_charg ALPHA = IN }|.</FPCLINE>
+      <FPCLINE> DATA(lv_charg_len) = strlen( lv_charg ).</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE> IF lv_charg_len NE 10.</FPCLINE>
+      <FPCLINE>   DATA(lv_lead) = 10 - lv_charg_len.</FPCLINE>
+      <FPCLINE>   WRITE lv_charg TO lv_charg RIGHT-JUSTIFIED.</FPCLINE>
+      <FPCLINE>   TRANSLATE lv_charg USING &apos; 0&apos;.</FPCLINE>
+      <FPCLINE> ENDIF.</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE> lv_concat = lv_charg.</FPCLINE>
+      <FPCLINE> DATA(concat) = |{ lv_matnr }{ lv_concat }|. &quot;yani toplamda 28 karakter olacak</FPCLINE>
+      <FPCLINE> DATA(lv_len) = strlen( concat ).</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE> IF lv_len NE 28.</FPCLINE>
+      <FPCLINE>   DATA(lv_space) = 28 - lv_len.</FPCLINE>
+      <FPCLINE>   SHIFT lv_concat RIGHT BY lv_space PLACES.</FPCLINE>
+      <FPCLINE> ENDIF.</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE> lv_matnr = |{ lv_matnr }{ lv_concat }|.</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE> lv_objectkey = lv_matnr.</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE> CALL FUNCTION &apos;BAPI_OBJCL_GETDETAIL&apos;</FPCLINE>
+      <FPCLINE>   EXPORTING</FPCLINE>
+      <FPCLINE>     objectkey       = lv_objectkey</FPCLINE>
+      <FPCLINE>     objecttable     = &apos;MCH1&apos;</FPCLINE>
+      <FPCLINE>     classnum        = &apos;PAMUK_PARTI&apos;</FPCLINE>
+      <FPCLINE>     classtype       = &apos;023&apos;</FPCLINE>
+      <FPCLINE>     keydate         = sy-datum</FPCLINE>
+      <FPCLINE>     language        = sy-langu</FPCLINE>
+      <FPCLINE>   TABLES</FPCLINE>
+      <FPCLINE>     allocvaluesnum  = lt_allocvaluesnum</FPCLINE>
+      <FPCLINE>     allocvalueschar = lt_allocvalueschar</FPCLINE>
+      <FPCLINE>     allocvaluescurr = lt_allocvaluescurr</FPCLINE>
+      <FPCLINE>     return          = lt_return.</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE> LOOP AT lt_allocvaluesnum ASSIGNING FIELD-SYMBOL(&lt;lfs_allocvaluesnum&gt;).</FPCLINE>
+      <FPCLINE>   DATA(lv_charact) = &lt;lfs_allocvaluesnum&gt;-charact.</FPCLINE>
+      <FPCLINE>   DATA(lv_value_from) = &lt;lfs_allocvaluesnum&gt;-value_from.</FPCLINE>
+      <FPCLINE> ENDLOOP.</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE/>
+      <FPCLINE> LOOP AT lt_data ASSIGNING FIELD-SYMBOL(&lt;lfs_data&gt;).</FPCLINE>
+      <FPCLINE>   is_data = CORRESPONDING #( &lt;lfs_data&gt; ).</FPCLINE>
+      <FPCLINE> ENDLOOP.</FPCLINE>
+     </INITIALIZATION>
+     <FORMS/>
+    </CL_FP_CODING>
+   </cls:CL_FP_CODING>
+  </asx:heap>
+ </asx:abap>
+</abapGit>
