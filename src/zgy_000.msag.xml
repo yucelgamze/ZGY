@@ -31,6 +31,24 @@
      <MSGNR>003</MSGNR>
      <TEXT>Satır seçiniz!</TEXT>
     </T100>
+    <T100>
+     <SPRSL>T</SPRSL>
+     <ARBGB>ZGY_000</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>Amblem database&apos;e yüklendi!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>T</SPRSL>
+     <ARBGB>ZGY_000</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>Silme işlemi başarılı şekilde gerçekleşmiştir.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>T</SPRSL>
+     <ARBGB>ZGY_000</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>Silme işlemi sırasında hata!!!</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>

@@ -23,7 +23,10 @@ CLASS lcl_class IMPLEMENTATION.
 
   METHOD print_adobe.
 
-    DATA:lv_concat TYPE char28.
+    DATA:lv_concat   TYPE char28,
+         lv_datatype TYPE dd01v-datatype,
+         lv_matnr    TYPE char50.
+
     DATA:lv_objectkey       TYPE bapi1003_key-object,
          lt_allocvaluesnum  TYPE TABLE OF  bapi1003_alloc_values_num,
          lt_allocvalueschar TYPE TABLE OF  bapi1003_alloc_values_char,
@@ -33,6 +36,7 @@ CLASS lcl_class IMPLEMENTATION.
 
     SELECT
     mseg~mblnr,
+    mseg~zeile,
     lfa1~lifnr,
     lfa1~name1,
     makt~maktx,
@@ -40,9 +44,11 @@ CLASS lcl_class IMPLEMENTATION.
     mkpf~xblnr,
     mkpf~cpudt,
     mseg~erfmg,
+    mseg~erfme,
     mseg~charg,
     mara~ntgew,
     mara~brgew,
+    mara~gewei,
     mseg~bwart,
     mseg~matnr
     FROM mseg
@@ -51,60 +57,86 @@ CLASS lcl_class IMPLEMENTATION.
     INNER JOIN mara ON mseg~matnr = mara~matnr
     LEFT  JOIN makt ON mara~matnr = makt~matnr
     WHERE makt~spras = 'T'
-    AND   mseg~mblnr = @p_mblnr
+    AND  mseg~mblnr IN @gr_mblnr[]
+*    AND  mseg~matnr IN @gr_matnr[]
+*    AND  mseg~charg IN @gr_charg[]
     AND   mseg~bwart = '101'
     INTO TABLE @DATA(lt_data).
 
-    DELETE ADJACENT DUPLICATES FROM lt_data COMPARING mblnr.
+    DELETE ADJACENT DUPLICATES FROM lt_data COMPARING mblnr zeile.
 
-    LOOP AT lt_data INTO DATA(ls_data).
-      DATA(lv_matnr) = ls_data-matnr.
-      DATA(lv_charg) = ls_data-charg.
-    ENDLOOP.
+    LOOP AT lt_data ASSIGNING FIELD-SYMBOL(<lfs_x>).
+      CLEAR:lv_concat,
+            lv_matnr,
+            lv_objectkey,
+            lv_datatype.
 
-    lv_charg = |{ lv_charg ALPHA = IN }|.
-    DATA(lv_charg_len) = strlen( lv_charg ).
+      IF <lfs_x>-matnr IS NOT INITIAL AND <lfs_x>-charg IS NOT INITIAL.
 
-    IF lv_charg_len NE 10.
-      DATA(lv_lead) = 10 - lv_charg_len.
-      WRITE lv_charg TO lv_charg RIGHT-JUSTIFIED.
-      TRANSLATE lv_charg USING ' 0'.
-    ENDIF.
+        <lfs_x>-charg = |{ <lfs_x>-charg ALPHA = IN }|.
+        DATA(lv_charg_len) = strlen( <lfs_x>-charg ).
 
-    lv_concat = lv_charg.
-    DATA(concat) = |{ lv_matnr }{ lv_concat }|. "yani toplamda 28 karakter olacak
-    DATA(lv_len) = strlen( concat ).
+        IF lv_charg_len NE 10.
+          DATA(lv_lead) = 10 - lv_charg_len.
+          WRITE <lfs_x>-charg TO <lfs_x>-charg RIGHT-JUSTIFIED.
+          TRANSLATE <lfs_x>-charg USING ' 0'.
+        ENDIF.
 
-    IF lv_len NE 28.
-      DATA(lv_space) = 28 - lv_len.
-      SHIFT lv_concat RIGHT BY lv_space PLACES.
-    ENDIF.
+        lv_concat = <lfs_x>-charg.
+        DATA(concat) = |{ <lfs_x>-matnr }{ lv_concat }|. "yani toplamda 28 karakter olacak
+        DATA(lv_len) = strlen( concat ).
 
-    lv_matnr = |{ lv_matnr }{ lv_concat }|.
+        CALL FUNCTION 'NUMERIC_CHECK'
+          EXPORTING
+            string_in = <lfs_x>-matnr
+          IMPORTING
+            htype     = lv_datatype.
 
-    lv_objectkey = lv_matnr.
+        IF lv_datatype EQ 'NUMC'.
 
-    CALL FUNCTION 'BAPI_OBJCL_GETDETAIL'
-      EXPORTING
-        objectkey       = lv_objectkey
-        objecttable     = 'MCH1'
-        classnum        = 'PAMUK_PARTI'
-        classtype       = '023'
-        keydate         = sy-datum
-        language        = sy-langu
-      TABLES
-        allocvaluesnum  = lt_allocvaluesnum
-        allocvalueschar = lt_allocvalueschar
-        allocvaluescurr = lt_allocvaluescurr
-        return          = lt_return.
+          lv_matnr = |{ <lfs_x>-matnr }{ lv_concat }|.
 
-    LOOP AT lt_allocvaluesnum ASSIGNING FIELD-SYMBOL(<lfs_allocvaluesnum>).
-      DATA(lv_charact) = <lfs_allocvaluesnum>-charact.
-      DATA(lv_value_from) = <lfs_allocvaluesnum>-value_from.
-    ENDLOOP.
+        ELSEIF <lfs_x>-matnr CA sy-abcde OR lv_datatype NE 'NUMC'.
+          IF lv_len NE 28.
+            DATA(lv_space) = 28 - lv_len.
+            SHIFT lv_concat RIGHT BY lv_space PLACES.
+          ENDIF.
 
-    LOOP AT lt_data ASSIGNING FIELD-SYMBOL(<lfs_data>).
-      gs_data = CORRESPONDING #( <lfs_data> ).
+          lv_matnr = |{ <lfs_x>-matnr }{ lv_concat }|.
+        ENDIF.
+
+        lv_objectkey = lv_matnr.
+
+        CALL FUNCTION 'BAPI_OBJCL_GETDETAIL'
+          EXPORTING
+            objectkey       = lv_objectkey
+            objecttable     = 'MCH1'
+            classnum        = 'HAMIPLIK_PARTI'
+            classtype       = '023'
+            keydate         = sy-datum
+            language        = sy-langu
+          TABLES
+            allocvaluesnum  = lt_allocvaluesnum
+            allocvalueschar = lt_allocvalueschar
+            allocvaluescurr = lt_allocvaluescurr
+            return          = lt_return.
+
+        LOOP AT lt_allocvaluesnum ASSIGNING FIELD-SYMBOL(<lfs_allocvaluesnum>).
+          IF <lfs_allocvaluesnum>-charact = 'BRUT_KG'.
+            DATA(lv_brgew) = <lfs_allocvaluesnum>-value_from.
+          ELSEIF <lfs_allocvaluesnum>-charact = 'NET_KG'.
+            DATA(lv_ntgew) = <lfs_allocvaluesnum>-value_from.
+          ENDIF.
+        ENDLOOP.
+
+        LOOP AT lt_data ASSIGNING FIELD-SYMBOL(<lfs_data>) WHERE charg = <lfs_x>-charg.
+          <lfs_data>-brgew = lv_brgew.
+*      <lfs_data>-ntgew = lv_ntgew.
+          <lfs_data>-ntgew = <lfs_data>-erfmg.
+        ENDLOOP.
+
+      ENDIF.
+
     ENDLOOP.
 
     IF sy-subrc IS INITIAL.

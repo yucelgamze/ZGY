@@ -16,6 +16,10 @@ DATA: fm_name         TYPE rs38l_fnam,
 
 DATA:gs_data TYPE zmm_006_s_balya.
 
+RANGES:gr_mblnr FOR mseg-mblnr,
+       gr_matnr FOR mseg-matnr,
+       gr_charg FOR mseg-charg.
+
 SELECTION-SCREEN BEGIN OF BLOCK a WITH FRAME TITLE TEXT-000.
   PARAMETERS:p_mblnr TYPE mseg-mblnr.
 SELECTION-SCREEN END OF BLOCK a.
