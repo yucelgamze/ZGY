@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_PROG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <PROGDIR>
+    <NAME>ZGY_DEV_P018</NAME>
+    <SUBC>1</SUBC>
+    <RLOAD>T</RLOAD>
+    <FIXPT>X</FIXPT>
+    <UCCHECK>X</UCCHECK>
+   </PROGDIR>
+   <TPOOL>
+    <item>
+     <ID>I</ID>
+     <KEY>000</KEY>
+     <ENTRY>Çıktı Seçiniz</ENTRY>
+     <LENGTH>23</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>001</KEY>
+     <ENTRY>Veri Giriniz</ENTRY>
+     <LENGTH>22</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>002</KEY>
+     <ENTRY>ZMM_007_AF_HAMIPLIK</ENTRY>
+     <LENGTH>29</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>003</KEY>
+     <ENTRY>ZMM_006_AF_BALYA</ENTRY>
+     <LENGTH>26</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>004</KEY>
+     <ENTRY>ZMM_003_AF_ETIKET</ENTRY>
+     <LENGTH>27</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>005</KEY>
+     <ENTRY>ZMM_008_AF_SPARE</ENTRY>
+     <LENGTH>26</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>006</KEY>
+     <ENTRY>ZMM_014_AF_KUMAS</ENTRY>
+     <LENGTH>26</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>007</KEY>
+     <ENTRY>ZMM_005_AF_STOCK</ENTRY>
+     <LENGTH>26</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>008</KEY>
+     <ENTRY>ZWM_001_AF_WARE</ENTRY>
+     <LENGTH>25</LENGTH>
+    </item>
+    <item>
+     <ID>R</ID>
+     <ENTRY>dynamic f4 sh for parameter when different rb has been selected</ENTRY>
+     <LENGTH>63</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_CHARG</KEY>
+     <ENTRY>.</ENTRY>
+     <LENGTH>9</LENGTH>
+     <SPLIT>D</SPLIT>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_LGPLA</KEY>
+     <ENTRY>Raf Adresi</ENTRY>
+     <LENGTH>18</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_MATNR</KEY>
+     <ENTRY>.</ENTRY>
+     <LENGTH>9</LENGTH>
+     <SPLIT>D</SPLIT>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_MBLNR</KEY>
+     <ENTRY>.</ENTRY>
+     <LENGTH>9</LENGTH>
+     <SPLIT>D</SPLIT>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_XBLNR</KEY>
+     <ENTRY>İrsaliye Numarası</ENTRY>
+     <LENGTH>25</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>RB_BALYA</KEY>
+     <ENTRY>İplik Boya Ham İplik Giriş Eti</ENTRY>
+     <LENGTH>38</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>RB_CLOTH</KEY>
+     <ENTRY>Kumaş Giriş Etiket Çıktısı</ENTRY>
+     <LENGTH>34</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>RB_HAM</KEY>
+     <ENTRY>Ham İplik Balya Etiketi</ENTRY>
+     <LENGTH>31</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>RB_KIMYA</KEY>
+     <ENTRY>Kimyasal &amp; Boyar Malzemeler</ENTRY>
+     <LENGTH>35</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>RB_KNIT</KEY>
+     <ENTRY>Örgü Fabrikası Etiket Çıktı</ENTRY>
+     <LENGTH>35</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>RB_SPARE</KEY>
+     <ENTRY>Yedek Parça Etiket Çıktısı</ENTRY>
+     <LENGTH>34</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>RB_STOCK</KEY>
+     <ENTRY>SAS Sonrası Mal Giriş Çıktısı</ENTRY>
+     <LENGTH>37</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>RB_WARE</KEY>
+     <ENTRY>Depo Malzeme Giriş Etiketi</ENTRY>
+     <LENGTH>34</LENGTH>
+    </item>
+   </TPOOL>
+  </asx:values>
+ </asx:abap>
+</abapGit>
