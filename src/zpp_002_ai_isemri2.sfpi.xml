@@ -143,37 +143,6 @@
       <FPCLINE>    not_found      = 1</FPCLINE>
       <FPCLINE>    internal_error = 2</FPCLINE>
       <FPCLINE>    OTHERS         = 3.</FPCLINE>
-      <FPCLINE/>
-      <FPCLINE/>
-      <FPCLINE/>
-      <FPCLINE>*&quot;BCOL = renkli BMON = siyah beyaz</FPCLINE>
-      <FPCLINE>*CALL METHOD cl_ssf_xsf_utilities=&gt;get_bds_graphic_as_bmp</FPCLINE>
-      <FPCLINE>*  EXPORTING</FPCLINE>
-      <FPCLINE>*    p_object       = &apos;GRAPHICS&apos;   &quot; SAPscript Graphics Management: Application object</FPCLINE>
-      <FPCLINE>*    p_name         = &apos;ZLACOSTELOGO&apos;  &quot; Name</FPCLINE>
-      <FPCLINE>*    p_id           = &apos;BMAP&apos;   &quot; SAPscript Graphics Management: ID</FPCLINE>
-      <FPCLINE>*    p_btype        = &apos;BCOL&apos;  &quot; SAPscript: Type of graphic</FPCLINE>
-      <FPCLINE>*  RECEIVING</FPCLINE>
-      <FPCLINE>*    p_bmp          = gg_lacoste   &quot; Graphic Data</FPCLINE>
-      <FPCLINE>*  EXCEPTIONS</FPCLINE>
-      <FPCLINE>*    not_found      = 1</FPCLINE>
-      <FPCLINE>*    internal_error = 2</FPCLINE>
-      <FPCLINE>*    OTHERS         = 3.</FPCLINE>
-      <FPCLINE>*</FPCLINE>
-      <FPCLINE>**--------------------------------------------------------------------*</FPCLINE>
-      <FPCLINE>*&quot;BCOL = renkli BMON = siyah beyaz</FPCLINE>
-      <FPCLINE>*CALL METHOD cl_ssf_xsf_utilities=&gt;get_bds_graphic_as_bmp</FPCLINE>
-      <FPCLINE>*  EXPORTING</FPCLINE>
-      <FPCLINE>*    p_object       = &apos;GRAPHICS&apos;   &quot; SAPscript Graphics Management: Application object</FPCLINE>
-      <FPCLINE>*    p_name         = &apos;ZCONVERSELOGO&apos;  &quot; Name</FPCLINE>
-      <FPCLINE>*    p_id           = &apos;BMAP&apos;   &quot; SAPscript Graphics Management: ID</FPCLINE>
-      <FPCLINE>*    p_btype        = &apos;BCOL&apos;  &quot; SAPscript: Type of graphic</FPCLINE>
-      <FPCLINE>*  RECEIVING</FPCLINE>
-      <FPCLINE>*    p_bmp          = gg_converse   &quot; Graphic Data</FPCLINE>
-      <FPCLINE>*  EXCEPTIONS</FPCLINE>
-      <FPCLINE>*    not_found      = 1</FPCLINE>
-      <FPCLINE>*    internal_error = 2</FPCLINE>
-      <FPCLINE>*    OTHERS         = 3.</FPCLINE>
      </INITIALIZATION>
      <FORMS/>
     </CL_FP_CODING>

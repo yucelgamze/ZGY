@@ -305,6 +305,21 @@ CLASS lcl_class IMPLEMENTATION.
 
     CLEAR:gs_data,fm_name,lv_brand_image.
 
+    TYPES:BEGIN OF lty_itab,
+            aufnr            TYPE caufv-aufnr,
+            ltxa1            TYPE afvc-ltxa1,
+            vornr            TYPE resb-vornr,
+            matnr            TYPE resb-matnr,
+            maktx            TYPE makt-maktx,
+            bdmng            TYPE resb-bdmng,
+            meins            TYPE resb-meins,
+            zz1_renk_kod_prd TYPE mara-zz1_renk_kod_prd,
+            sortf            TYPE resb-sortf,
+          END OF lty_itab.
+
+    DATA:ls_blank TYPE lty_itab.
+*--------------------------------------------------------------------*
+
     SELECT SINGLE
     brand_image
     FROM zpp_002_t_isemri
@@ -333,8 +348,8 @@ CLASS lcl_class IMPLEMENTATION.
     LEFT JOIN afpo ON afko~aufnr EQ afpo~aufnr
     LEFT JOIN t001l ON afpo~lgort EQ t001l~lgort AND t001l~werks = caufv~werks
     WHERE caufv~aufnr = @p_aufnr
-    AND   makt~spras  = 'T'
-    AND   wrf_charvalt~spras = 'T'
+    AND   makt~spras  = @sy-langu
+    AND   wrf_charvalt~spras = @sy-langu
     INTO TABLE @DATA(lt_data).
 
 
@@ -358,7 +373,7 @@ CLASS lcl_class IMPLEMENTATION.
 *    INTO @lv_brand_image
 *    WHERE brand_id = @gs_data-brand.
 
-    IF sy-subrc IS INITIAL AND lt_data IS NOT INITIAL.
+    IF lt_data IS NOT INITIAL.
 
       SELECT
       caufv~aufnr,
@@ -366,17 +381,12 @@ CLASS lcl_class IMPLEMENTATION.
       afvc~vornr,
       afvc~aufpl,
       caufv~plnbez
-*      makt~maktx,
-*      mara~zz1_renk_kod_prd
       FROM caufv
       INNER JOIN afvc ON caufv~werks  EQ afvc~werks  AND caufv~aufpl EQ afvc~aufpl
-*      INNER JOIN mara ON caufv~plnbez EQ mara~matnr
-*      LEFT JOIN  makt ON mara~matnr   EQ makt~matnr
       INTO TABLE @DATA(lt_afvc)
       FOR ALL ENTRIES IN @lt_data
-      WHERE caufv~aufnr = @lt_data-aufnr
-*      AND   makt~spras  = 'T'
-        .
+      WHERE caufv~aufnr = @lt_data-aufnr.
+
       SORT lt_afvc BY vornr.
 
       IF lt_afvc IS NOT INITIAL.
@@ -399,47 +409,19 @@ CLASS lcl_class IMPLEMENTATION.
         INTO TABLE @DATA(lt_itab)
         FOR ALL ENTRIES IN @lt_afvc
         WHERE caufv~aufnr = @p_aufnr
-        AND   makt~spras  = 'T'
+        AND   makt~spras  = @sy-langu
         AND   resb~aufpl EQ @lt_afvc-aufpl
         AND   resb~vornr = @lt_afvc-vornr
         AND   afvc~ltxa1 = @lt_afvc-ltxa1.
 
         SORT lt_itab BY vornr.
 *--------------------------------------------------------------------*
-        TYPES:BEGIN OF lty_itab,
-                aufnr            TYPE caufv-aufnr,
-                ltxa1            TYPE afvc-ltxa1,
-                vornr            TYPE resb-vornr,
-                matnr            TYPE resb-matnr,
-                maktx            TYPE makt-maktx,
-                bdmng            TYPE resb-bdmng,
-                meins            TYPE resb-meins,
-                zz1_renk_kod_prd TYPE mara-zz1_renk_kod_prd,
-                sortf            TYPE resb-sortf,
-              END OF lty_itab.
-
-        DATA:ls_blank TYPE lty_itab.
-*--------------------------------------------------------------------*
-
-*        LOOP AT lt_itab ASSIGNING FIELD-SYMBOL(<lfs_f>) GROUP BY ( aufnr = <lfs_f>-aufnr
-*                                                                   ltxa1 = <lfs_f>-ltxa1 ) ASSIGNING FIELD-SYMBOL(<lfs_itabcpy>) .
-*
-*          LOOP AT lt_afvc ASSIGNING FIELD-SYMBOL(<lfs_afvc>) WHERE ltxa1 <> <lfs_itabcpy>-ltxa1
-*                                                             AND   aufnr = <lfs_itabcpy>-aufnr.
-*            ls_blank = VALUE #( aufnr = p_aufnr
-*                                ltxa1 = <lfs_afvc>-ltxa1
-*                                vornr = <lfs_afvc>-vornr
-*                                bdmng = CONV #( ' ' ) ).
-*
-*          ENDLOOP.
-*
-*        ENDLOOP.
-*        APPEND ls_blank TO lt_itab.
 
         LOOP AT lt_afvc ASSIGNING FIELD-SYMBOL(<lfs_afvc>).
           LOOP AT lt_itab ASSIGNING FIELD-SYMBOL(<lfs_f>) WHERE vornr EQ <lfs_afvc>-vornr.
             EXIT.
           ENDLOOP.
+
           IF sy-subrc <> 0.
             ls_blank = VALUE #( aufnr = p_aufnr
                                 ltxa1 = <lfs_afvc>-ltxa1
@@ -451,47 +433,6 @@ CLASS lcl_class IMPLEMENTATION.
 
         SORT lt_itab BY vornr.
 *--------------------------------------------------------------------*
-*        DATA(lt_itabcpy) = lt_itab.
-*        DELETE ADJACENT DUPLICATES FROM lt_itabcpy COMPARING ltxa1.
-*
-*        LOOP AT lt_itabcpy ASSIGNING FIELD-SYMBOL(<lfs_itabcpyx>).
-*          READ TABLE lt_afvc ASSIGNING FIELD-SYMBOL(<lfs_afvcx>) WITH KEY ltxa1 = <lfs_itabcpyx>-ltxa1 BINARY SEARCH.
-*          IF sy-subrc <> 0  AND <lfs_afvcx> IS ASSIGNED.
-*            ls_blank = VALUE #( aufnr = p_aufnr
-*                                ltxa1 = <lfs_afvcx>-ltxa1
-*                                vornr = <lfs_afvcx>-vornr
-*                                bdmng = CONV #( ' ' ) ).
-*
-*            APPEND ls_blank TO lt_itab.
-*          ENDIF.
-*        ENDLOOP.
-
-
-
-
-*        SELECT
-*        caufv~aufnr,
-*        afvc~ltxa1,
-*        resb~vornr,
-*        resb~matnr,
-*        makt~maktx,
-*        resb~bdmng,
-*        resb~meins,
-*        mara~zz1_renk_kod_prd,
-*        resb~sortf
-*        FROM caufv
-*        INNER JOIN afvc ON caufv~werks  EQ afvc~werks  AND caufv~aufpl EQ afvc~aufpl
-*        INNER JOIN resb ON afvc~werks   EQ resb~werks  AND resb~aufpl EQ afvc~aufpl AND resb~xloek = @space AND resb~vornr = afvc~vornr
-*        INNER JOIN mara ON resb~matnr   EQ mara~matnr
-*        LEFT JOIN  makt ON mara~matnr   EQ makt~matnr
-*        WHERE caufv~aufnr = @p_aufnr
-*        AND   makt~spras  = 'T'
-*        GROUP BY resb~vornr,caufv~aufnr,afvc~ltxa1,resb~matnr,makt~maktx,resb~bdmng,resb~meins, mara~zz1_renk_kod_prd,resb~sortf
-*        INTO TABLE @DATA(lt_table).
-
-*        SORT lt_table BY vornr.
-
-        SORT lt_itab BY vornr.
 
         LOOP AT lt_itab ASSIGNING FIELD-SYMBOL(<lfs_table>) GROUP BY ( aufnr = <lfs_table>-aufnr
                                                                        ltxa1 = <lfs_table>-ltxa1 ) "ASCENDING

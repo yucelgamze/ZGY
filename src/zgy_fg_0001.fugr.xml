@@ -10,6 +10,7 @@
    <FUNCTIONS>
     <item>
      <FUNCNAME>ZGY_FM_0001</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
      <SHORT_TEXT>matnr check</SHORT_TEXT>
      <IMPORT>
       <RSIMP>
