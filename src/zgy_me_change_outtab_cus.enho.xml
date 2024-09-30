@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_ENHO" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <TOOL>BADI_IMPL</TOOL>
+   <SHORTTEXT>me2n additional fields</SHORTTEXT>
+   <SPOT_NAME>ES_BADI_ME_REPORTING</SPOT_NAME>
+   <IMPL>
+    <ENH_BADI_IMPL_DATA>
+     <SPOT_NAME>ES_BADI_ME_REPORTING</SPOT_NAME>
+     <BADI_NAME>ME_CHANGE_OUTTAB_CUS</BADI_NAME>
+     <IMPL_NAME>ZGY_ME_CHANGE_OUTTAB_CUS</IMPL_NAME>
+     <IMPL_CLASS>ZGY_CL_ME_CHANGE_OUTTAB_CUS</IMPL_CLASS>
+     <ACTIVE>X</ACTIVE>
+     <IMPL_SHORTTEXT>Uygulama: BAdI: Raporlamada ALV çıktı tablolarını zenginleştir</IMPL_SHORTTEXT>
+     <IMPL_SHORTTEXT_ID>59716EE189B51EDF9FE9C3EA59D3F2E2</IMPL_SHORTTEXT_ID>
+     <LOCKED_IN_CUSTOMIZING>X</LOCKED_IN_CUSTOMIZING>
+    </ENH_BADI_IMPL_DATA>
+   </IMPL>
+   <SOTR>
+    <item>
+     <HEADER>
+      <CONCEPT>59716EE189B51EDF9FE9C1D53032D2BC</CONCEPT>
+      <CREA_LAN>T</CREA_LAN>
+      <TRALA_TYPE>1</TRALA_TYPE>
+      <OBJID_VEC>AAI=</OBJID_VEC>
+     </HEADER>
+     <ENTRIES>
+      <SOTR_TEXT>
+       <CONCEPT>59716EE189B51EDF9FE9C1D53032D2BC</CONCEPT>
+       <LANGU>T</LANGU>
+       <LFD_NUM>0001</LFD_NUM>
+       <FLAG_CNTXT>X</FLAG_CNTXT>
+       <STATUS>R</STATUS>
+       <LENGTH>255</LENGTH>
+       <TEXT>me2n additional fields</TEXT>
+      </SOTR_TEXT>
+     </ENTRIES>
+    </item>
+    <item>
+     <HEADER>
+      <CONCEPT>59716EE189B51EDF9FE9C3EA59D3F2E2</CONCEPT>
+      <CREA_LAN>T</CREA_LAN>
+      <TRALA_TYPE>1</TRALA_TYPE>
+      <OBJID_VEC>AAI=</OBJID_VEC>
+     </HEADER>
+     <ENTRIES>
+      <SOTR_TEXT>
+       <CONCEPT>59716EE189B51EDF9FE9C3EA59D3F2E2</CONCEPT>
+       <LANGU>T</LANGU>
+       <LFD_NUM>0001</LFD_NUM>
+       <FLAG_CNTXT>X</FLAG_CNTXT>
+       <STATUS>R</STATUS>
+       <LENGTH>255</LENGTH>
+       <TEXT>Uygulama: BAdI: Raporlamada ALV çıktı tablolarını zenginleştir</TEXT>
+      </SOTR_TEXT>
+     </ENTRIES>
+    </item>
+   </SOTR>
+   <SOTR_USE>
+    <SOTR_USE>
+     <PGMID>R3TR</PGMID>
+     <OBJECT>ENHO</OBJECT>
+     <OBJ_NAME>ZGY_ME_CHANGE_OUTTAB_CUS</OBJ_NAME>
+     <CONCEPT>59716EE189B51EDF9FE9C1D53032D2BC</CONCEPT>
+     <LFD_NUM>0001</LFD_NUM>
+    </SOTR_USE>
+    <SOTR_USE>
+     <PGMID>R3TR</PGMID>
+     <OBJECT>ENHO</OBJECT>
+     <OBJ_NAME>ZGY_ME_CHANGE_OUTTAB_CUS</OBJ_NAME>
+     <CONCEPT>59716EE189B51EDF9FE9C3EA59D3F2E2</CONCEPT>
+     <LFD_NUM>0001</LFD_NUM>
+    </SOTR_USE>
+   </SOTR_USE>
+  </asx:values>
+ </asx:abap>
+</abapGit>

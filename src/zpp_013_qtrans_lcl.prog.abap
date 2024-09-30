@@ -221,7 +221,8 @@ CLASS lcl_class IMPLEMENTATION.
                                   meins        = ls_meins-meins
                                   kalite_maktx = ls_kalite_matnr-maktx
                                   hedef_stok   = ls_hedef_depo-labst
-                                  hedef_parti  = ls_hedef_depo-charg ).
+***                                  hedef_parti  = ls_hedef_depo-charg
+                                  ).
 
       CALL METHOD go_alv_grid->refresh_table_display( ).
     ENDIF.
@@ -247,21 +248,21 @@ CLASS lcl_class IMPLEMENTATION.
       ENDIF.
     ENDLOOP.
 
-*    ELSE.
-*
-*      LOOP AT gt_table ASSIGNING FIELD-SYMBOL(<lfs_table_update>) WHERE matnr = ls_maktx-matnr
-**                                                                  AND   lgort = ls_labst-lgort
-**                                                                  AND   kalite_matnr = ls_kalite_matnr-matnr
-**                                                                  AND   hedef_depo = ls_hedef_depo-lgort
-*                                                                                                              .
-*        <lfs_table_update> = VALUE #( BASE <lfs_table_update>
-*                                    maktx        = ls_maktx-maktx
-*                                    labst        = ls_labst-labst
-*                                    meins        = ls_meins-meins
-*                                    kalite_maktx = ls_kalite_matnr-maktx
-*                                    hedef_stok   = ls_hedef_depo-labst ).
-*      ENDLOOP.
-*    ENDIF.
+**    ELSE.
+**
+**      LOOP AT gt_table ASSIGNING FIELD-SYMBOL(<lfs_table_update>) WHERE matnr = ls_maktx-matnr
+***                                                                  AND   lgort = ls_labst-lgort
+***                                                                  AND   kalite_matnr = ls_kalite_matnr-matnr
+***                                                                  AND   hedef_depo = ls_hedef_depo-lgort
+**                                                                                                              .
+**        <lfs_table_update> = VALUE #( BASE <lfs_table_update>
+**                                    maktx        = ls_maktx-maktx
+**                                    labst        = ls_labst-labst
+**                                    meins        = ls_meins-meins
+**                                    kalite_maktx = ls_kalite_matnr-maktx
+**                                    hedef_stok   = ls_hedef_depo-labst ).
+**      ENDLOOP.
+**    ENDIF.
   ENDMETHOD.
 
   METHOD call_func.
@@ -304,17 +305,19 @@ CLASS lcl_class IMPLEMENTATION.
 
       ls_item = CORRESPONDING #( <lfs_table> ).
       ls_item = VALUE #( BASE ls_item
-                              material   = <lfs_table>-matnr
-                              plant      = so_werks-low
-                              stge_loc   = <lfs_table>-lgort
-                              move_type  = |309|
-                              entry_qnt  = <lfs_table>-transfer_miktar
-                              entry_uom  = <lfs_table>-meins
-                              move_mat   = <lfs_table>-kalite_matnr
-                              move_plant = so_werks-low
-                              move_stloc = <lfs_table>-hedef_depo
-                              batch      = <lfs_table>-charg
-                              move_batch = <lfs_table>-hedef_parti
+                              material      = <lfs_table>-matnr
+                              material_long = <lfs_table>-matnr
+                              plant         = so_werks-low
+                              stge_loc      = <lfs_table>-lgort
+                              move_type     = |309|
+                              entry_qnt     = <lfs_table>-transfer_miktar
+                              entry_uom     = <lfs_table>-meins
+                              move_mat      = <lfs_table>-kalite_matnr
+                              move_mat_long = <lfs_table>-kalite_matnr
+                              move_plant    = so_werks-low
+                              move_stloc    = <lfs_table>-hedef_depo
+                              batch         = <lfs_table>-charg
+                              move_batch    = <lfs_table>-charg  """<lfs_table>-hedef_parti
                               ).
       APPEND ls_item TO lt_item.
 
@@ -428,17 +431,19 @@ CLASS lcl_class IMPLEMENTATION.
         CLEAR:ls_item.
         ls_item = CORRESPONDING #( <lfs_table> ).
         ls_item = VALUE #( BASE ls_item
-                                material   = <lfs_table>-matnr
-                                plant      = so_werks-low
-                                stge_loc   = <lfs_table>-lgort
-                                move_type  = |309|
-                                entry_qnt  = <lfs_table>-transfer_miktar
-                                entry_uom  = <lfs_table>-meins
-                                move_mat   = <lfs_table>-kalite_matnr
-                                move_plant = so_werks-low
-                                move_stloc = <lfs_table>-hedef_depo
-                                batch      = <lfs_table>-charg
-                                move_batch = <lfs_table>-hedef_parti
+                                material      = <lfs_table>-matnr
+                                material_long = <lfs_table>-matnr
+                                plant         = so_werks-low
+                                stge_loc      = <lfs_table>-lgort
+                                move_type     = |309|
+                                entry_qnt     = <lfs_table>-transfer_miktar
+                                entry_uom     = <lfs_table>-meins
+                                move_mat      = <lfs_table>-kalite_matnr
+                                move_mat_long = <lfs_table>-kalite_matnr
+                                move_plant    = so_werks-low
+                                move_stloc    = <lfs_table>-hedef_depo
+                                batch         = <lfs_table>-charg
+                                move_batch    = <lfs_table>-charg """<lfs_table>-hedef_parti
                                 ).
         APPEND ls_item TO lt_item.
       ENDLOOP.
@@ -516,6 +521,7 @@ CLASS lcl_class IMPLEMENTATION.
 
     gt_trans = CORRESPONDING #( gt_table ).
     MODIFY zpp_013_t_trans FROM TABLE gt_trans.
+
 
   ENDMETHOD.
 
@@ -615,25 +621,33 @@ CLASS lcl_class IMPLEMENTATION.
 
       ENDIF.
 
+      "kaynak stok için update
       LOOP AT lt_labst_inner INTO DATA(ls_labst_inner).
-
-        LOOP AT lt_hedef_inner INTO DATA(ls_hedef_inner).
-
-          LOOP AT gt_table ASSIGNING FIELD-SYMBOL(<lfs_tab_commit_update>) WHERE matnr = ls_labst_inner-matnr
-                                                                     AND   lgort = ls_labst_inner-lgort
-                                                                     AND   charg = ls_labst_inner-charg
-                                                                     AND   hedef_parti = ls_hedef_inner-charg
-                                                                     AND   kalite_matnr = ls_hedef_inner-matnr
-                                                                     AND   hedef_depo = ls_hedef_inner-lgort.
-            <lfs_tab_commit_update> = VALUE #( BASE <lfs_tab_commit_update>
-                                  labst        = ls_labst_inner-labst
-                                  hedef_stok   = ls_hedef_inner-labst
+        LOOP AT gt_table ASSIGNING FIELD-SYMBOL(<lfs_tab_commit_update>) WHERE matnr = ls_labst_inner-matnr
+                                                                   AND   lgort = ls_labst_inner-lgort
+                                                                   AND   charg = ls_labst_inner-charg.
+          <lfs_tab_commit_update> = VALUE #( BASE <lfs_tab_commit_update>
+                                labst        = ls_labst_inner-labst
 *                                  transfer_miktar = 0
-                                  ).
+                                ).
 *            CLEAR:<lfs_tab_commit_update>-transfer_durumu.
-            CALL METHOD go_alv_grid->refresh_table_display( ).
+          CALL METHOD go_alv_grid->refresh_table_display( ).
 
-          ENDLOOP.
+        ENDLOOP.
+      ENDLOOP.
+
+      "hedef stok için update
+      LOOP AT lt_hedef_inner INTO DATA(ls_hedef_inner).
+        LOOP AT gt_table ASSIGNING FIELD-SYMBOL(<lfs_tab_commit_updatey>) WHERE
+                                                                         hedef_parti = ls_hedef_inner-charg
+                                                                   AND   kalite_matnr = ls_hedef_inner-matnr
+                                                                   AND   hedef_depo = ls_hedef_inner-lgort.
+          <lfs_tab_commit_updatey> = VALUE #( BASE <lfs_tab_commit_updatey>
+                                hedef_stok   = ls_hedef_inner-labst
+*                                  transfer_miktar = 0
+                                ).
+*            CLEAR:<lfs_tab_commit_update>-transfer_durumu.
+          CALL METHOD go_alv_grid->refresh_table_display( ).
         ENDLOOP.
       ENDLOOP.
 
@@ -746,7 +760,7 @@ CLASS lcl_class IMPLEMENTATION.
             register  = abap_true
 *            getbefore = abap_true
 *            chngeafter = abap_true
-).
+  ).
     APPEND ls_f4 TO lt_f4.
 
     CLEAR:ls_f4.
@@ -755,7 +769,7 @@ CLASS lcl_class IMPLEMENTATION.
             register  = abap_true
 *            getbefore = abap_true
 *            chngeafter = abap_true
- ).
+  ).
     APPEND ls_f4 TO lt_f4.
 
     CLEAR:ls_f4.
@@ -807,7 +821,7 @@ CLASS lcl_class IMPLEMENTATION.
     lgobe,
     labst,
     meins
-*    FROM zpp_013_ddl_depo_yeri
+**    FROM zpp_013_ddl_depo_yeri
       FROM zpp_013_v_depo
     INTO CORRESPONDING FIELDS OF TABLE @lt_value_tab
     WHERE matnr = @gv_matnr
@@ -824,7 +838,7 @@ CLASS lcl_class IMPLEMENTATION.
         value_tab    = lt_value_tab
         return_tab   = lt_return_tab.
 
-    READ TABLE lt_return_tab INTO ls_return_tab WITH KEY fieldname = 'F0003'.
+    READ TABLE lt_return_tab INTO ls_return_tab WITH KEY fieldname = 'F0003' BINARY SEARCH.
     IF sy-subrc IS INITIAL.
       READ TABLE gt_table ASSIGNING <gfs_table> INDEX es_row_no-row_id.
       IF sy-subrc IS INITIAL.
@@ -889,7 +903,7 @@ CLASS lcl_class IMPLEMENTATION.
     charg,
     clabs,
     meins
-*    FROM zpp_013_ddl_parti_no
+**    FROM zpp_013_ddl_parti_no
       FROM zpp_013_v_parti
     INTO CORRESPONDING FIELDS OF TABLE @lt_value_tab_p
     WHERE matnr = @gv_matnr
@@ -906,12 +920,13 @@ CLASS lcl_class IMPLEMENTATION.
         value_tab    = lt_value_tab_p
         return_tab   = lt_return_tab_p.
 
-    READ TABLE lt_return_tab_p INTO ls_return_tab_p WITH KEY fieldname = 'F0005'.
+    READ TABLE lt_return_tab_p INTO ls_return_tab_p WITH KEY fieldname = 'F0005' BINARY SEARCH.
     IF sy-subrc IS INITIAL.
       READ TABLE gt_table ASSIGNING <gfs_table> INDEX es_row_no-row_id.
       IF sy-subrc IS INITIAL.
 
         <gfs_table>-charg = ls_return_tab_p-fieldval.
+        <gfs_table>-hedef_parti = ls_return_tab_p-fieldval.
 
         gv_charg = ls_return_tab_p-fieldval.
         gv_hedef_parti = ls_return_tab_p-fieldval.
@@ -968,7 +983,7 @@ CLASS lcl_class IMPLEMENTATION.
     SELECT
     matnr AS kalite_matnr,
     maktx AS kalite_maktx
-*    FROM zpp_013_ddl_kalite_malzeme
+**    FROM zpp_013_ddl_kalite_malzeme
       FROM zpp_013_v_kalite
     INTO CORRESPONDING FIELDS OF TABLE @lt_value_tab_
     WHERE matnr IN @gr_matnr[].
@@ -978,20 +993,23 @@ CLASS lcl_class IMPLEMENTATION.
 *--------------------------------------------------------------------* kalite matnr de 1.kalite malzeme olmasın
     DELETE lt_value_tab_ WHERE kalite_matnr = gv_matnr.
 *--------------------------------------------------------------------*
-
+    IF lt_value_tab_ IS INITIAL.   "02.08.2024 edit
+      MESSAGE i004.
+    ENDIF.
+*--------------------------------------------------------------------*
     CLEAR:gr_matnr.
     REFRESH:gr_matnr[].
 
     CALL FUNCTION 'F4IF_INT_TABLE_VALUE_REQUEST'
       EXPORTING
         retfield     = 'KALITE_MATNR'
-        window_title = '2/3. Kalite Malzeme Search Help'
+        window_title = 'Hedef Malzeme Search Help'
         value_org    = 'S'
       TABLES
         value_tab    = lt_value_tab_
         return_tab   = lt_return_tab_.
 
-    READ TABLE lt_return_tab_ INTO ls_return_tab_ WITH KEY fieldname = 'F0001'.
+    READ TABLE lt_return_tab_ INTO ls_return_tab_ WITH KEY fieldname = 'F0001' BINARY SEARCH.
     IF sy-subrc IS INITIAL.
       READ TABLE gt_table ASSIGNING <gfs_table> INDEX es_row_no-row_id.
       IF sy-subrc IS INITIAL.
@@ -1046,8 +1064,8 @@ CLASS lcl_class IMPLEMENTATION.
     lgobe,
     labst AS hedef_stok,
     meins
-*    FROM zpp_013_ddl_depo_yeri
-      FROM zpp_013_v_depo
+**    FROM zpp_013_ddl_hedef_depo
+      FROM zpp_013_v_target
     INTO CORRESPONDING FIELDS OF TABLE @lt_value_tab_x
     WHERE matnr = @gv_kalite_matnr
     AND werks IN @so_werks.
@@ -1063,7 +1081,7 @@ CLASS lcl_class IMPLEMENTATION.
         value_tab    = lt_value_tab_x
         return_tab   = lt_return_tab_x.
 
-    READ TABLE lt_return_tab_x INTO ls_return_tab_x WITH KEY fieldname = 'F0003'.
+    READ TABLE lt_return_tab_x INTO ls_return_tab_x WITH KEY fieldname = 'F0003' BINARY SEARCH.
     IF sy-subrc IS INITIAL.
       READ TABLE gt_table ASSIGNING <gfs_table> INDEX es_row_no-row_id.
       IF sy-subrc IS INITIAL.
@@ -1198,7 +1216,6 @@ CLASS lcl_class IMPLEMENTATION.
                          ).
         WHEN 'MATNR'.
           <lfs_fcat>-edit = abap_true .
-          <lfs_fcat>-f4availabl = abap_true .
         WHEN 'LGORT'.
           <lfs_fcat> = VALUE #( BASE <lfs_fcat>
                         edit  = abap_true
