@@ -50,7 +50,7 @@ CLASS ZCL_IM_MM_000_PR_MAIL IMPLEMENTATION.
   METHOD if_ex_me_process_req_cust~post.
 
     "ME53N
-    IF sy-uname EQ 'GAMZEY' OR sy-uname EQ 'TALHAC' OR sy-uname EQ 'OKTAYC'.
+    IF sy-uname EQ 'GAMZEY'.
 
       DATA:ls_item  TYPE mereq_item,
            lt_items TYPE mmpur_requisition_items.
@@ -101,53 +101,51 @@ CLASS ZCL_IM_MM_000_PR_MAIL IMPLEMENTATION.
 
       IF ls_item IS NOT INITIAL.
 
-        SELECT
-        eban~bnfpo,
-        eban~banpr,
-        eban~badat,
-        eban~frgdt,
-        eban~ernam,
-        eban~banfn,
-        mara~mtart,
-        eban~matnr,
-        makt~maktx,
-        t023t~wgbez,
-        eban~preis,
-        eban~peinh,
-        eban~menge,
-        eban~waers
+        SELECT eban~bnfpo,
+               eban~banpr,
+               eban~badat,
+               eban~frgdt,
+               eban~ernam,
+               eban~banfn,
+               mara~mtart,
+               eban~matnr,
+               makt~maktx,
+               t023t~wgbez,
+               eban~preis,
+               eban~peinh,
+               eban~menge,
+               eban~waers
         FROM eban
-        INNER JOIN mara  ON eban~matnr = mara~matnr
+        INNER JOIN mara ON eban~matnr = mara~matnr
         LEFT JOIN makt  ON mara~matnr = makt~maktx
+                       AND makt~spras = @sy-langu
         LEFT JOIN t023t ON eban~matkl = t023t~matkl
+                       AND t023t~spras = @sy-langu
         WHERE eban~banfn = @im_banfn
-        AND   makt~spras = 'T'
-        AND   t023t~spras = 'T'
         INTO TABLE @DATA(lt_data).
 
-        SELECT SINGLE
-        eban~bnfpo,
-        eban~banpr,
-        eban~badat,
-        eban~frgdt,
-        eban~ernam,
-        eban~banfn,
-        mara~mtart,
-        eban~matnr,
-        makt~maktx,
-        t023t~wgbez,
-        eban~preis,
-        eban~peinh,
-        eban~menge,
-        eban~waers
+        SELECT SINGLE eban~bnfpo,
+                      eban~banpr,
+                      eban~badat,
+                      eban~frgdt,
+                      eban~ernam,
+                      eban~banfn,
+                      mara~mtart,
+                      eban~matnr,
+                      makt~maktx,
+                      t023t~wgbez,
+                      eban~preis,
+                      eban~peinh,
+                      eban~menge,
+                      eban~waers
         FROM eban
         INNER JOIN mara  ON eban~matnr = mara~matnr
         LEFT JOIN makt  ON mara~matnr = makt~maktx
+                       AND makt~spras = @sy-langu
         LEFT JOIN t023t ON eban~matkl = t023t~matkl
+                       AND t023t~spras = @sy-langu
         WHERE eban~banfn = @im_banfn
         AND   eban~bnfpo = @ls_item-bnfpo
-        AND   makt~spras = 'T'
-        AND   t023t~spras = 'T'
         INTO  @DATA(ls_dataxx).
 
 
@@ -266,7 +264,7 @@ CLASS ZCL_IM_MM_000_PR_MAIL IMPLEMENTATION.
                && '</body>  '
                && '</html> '.
 
-          CALL FUNCTION 'ZABAP_001_FM_SENDMAIL'
+          CALL FUNCTION 'ZABAP_001_FM_SENDMAIL' IN BACKGROUND TASK
             EXPORTING
               iv_content       = lv_content
               iv_subject       = lv_subject
