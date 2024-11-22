@@ -24,6 +24,7 @@ CLASS lcl_class IMPLEMENTATION.
                     bseg~pswsl,
                     bseg~koart,
                     SUM( bseg~wrbtr ) AS w,
+                    substring( bkpf~bldat , 1 , 6 ) AS month,
                     CASE WHEN bseg~shkzg  = 'H' THEN SUM( bseg~wrbtr )     "H borç      pozitif
                          WHEN bseg~shkzg  = 'S' THEN SUM( - bseg~wrbtr )   "S alacak    negatif
                     END AS w2,
@@ -33,7 +34,6 @@ CLASS lcl_class IMPLEMENTATION.
                     CASE WHEN bseg~koart = 'K' THEN concat( concat( lfa1~name1, ' ' ),lfa1~name2 ) "K satıcı
                          WHEN bseg~koart = 'D' THEN concat( concat( kna1~name1, ' ' ),kna1~name2 ) "D müşteri
                     END  AS name,
-                    substring( bkpf~bldat , 1 , 6 ) AS month,
                     bseg~shkzg,
                     bkpf~bldat
     FROM bseg
@@ -53,6 +53,7 @@ CLASS lcl_class IMPLEMENTATION.
 
     LOOP AT lt_tab ASSIGNING FIELD-SYMBOL(<lfs_tab>).
       gs_alv = VALUE #( BASE gs_alv
+                             pswsl = <lfs_tab>-pswsl
                              spmon = <lfs_tab>-month
                              no    = <lfs_tab>-number
                              isim  = <lfs_tab>-name
@@ -63,19 +64,23 @@ CLASS lcl_class IMPLEMENTATION.
     SORT gt_alv BY no spmon.
 
   ENDMETHOD.
+
   METHOD call_screen.
     CALL SCREEN 0100.
   ENDMETHOD.
+
   METHOD pbo_0100.
     SET PF-STATUS '0100'.
     SET TITLEBAR '0100'.
   ENDMETHOD.
+
   METHOD pai_0100.
     CASE iv_ucomm.
       WHEN '&BACK'.
         SET SCREEN 0.
     ENDCASE.
   ENDMETHOD.
+
   METHOD set_fcat.
 
     DATA:lv_count TYPE int4 VALUE 4.
@@ -209,11 +214,15 @@ CLASS lcl_class IMPLEMENTATION.
       ENDLOOP.
     ENDLOOP.
   ENDMETHOD.
+
   METHOD set_layout.
-    gs_layout-zebra      = abap_true.
-    gs_layout-cwidth_opt = abap_true.
-    gs_layout-col_opt    = abap_true.
+    CLEAR:gs_layout.
+    gs_layout = VALUE #( BASE gs_layout
+                              zebra      = abap_true
+                              cwidth_opt = abap_true
+                              col_opt    = abap_true ).
   ENDMETHOD.
+
   METHOD display_alv.
     IF go_alv_grid IS INITIAL.
       CREATE OBJECT go_container
