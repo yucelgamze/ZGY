@@ -27,3 +27,30 @@ ENDLOOP.
 CALL FUNCTION 'C14Z_MESSAGES_SHOW_AS_POPUP'
   TABLES
     i_message_tab = lt_messages.
+
+
+**CALL FUNCTION 'WS_DELIVERY_UPDATE_2'
+**  EXPORTING
+**    vbkok_wa      = ls_vbkok
+**    commit        = abap_true
+**    delivery      = lv_delivery
+**  IMPORTING
+**    ef_error_any  = lv_error
+**  TABLES
+**    vbpok_tab     = lt_vbpok
+**    prot          = lt_prot
+**  EXCEPTIONS
+**    error_message = 99.
+**IF sy-subrc <> 0.
+**  APPEND VALUE #( type = 'E'
+**                  id   = sy-msgid
+**                  number = sy-msgno
+**                  message_v1 = sy-msgv1
+**                  message_v2 = sy-msgv2
+**                  message_v3 = sy-msgv3
+**                  message_v4 = sy-msgv4 ) TO gt_return.
+**ELSE.
+**  CALL FUNCTION 'BAPI_TRANSACTION_COMMIT'
+**    EXPORTING
+**      wait = 'X'.
+**ENDIF.

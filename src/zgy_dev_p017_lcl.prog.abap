@@ -15,65 +15,52 @@ ENDCLASS.
 CLASS lcl_class IMPLEMENTATION.
   METHOD get_data.
 
-    SELECT
-    kna1~kunnr,
-    lfa1~lifnr,
-    kna1~name1,
-    kna1~name2,
-    lfa1~name1        AS lname1,
-    lfa1~name2        AS lname2,
-    bseg~pswsl,
-    bseg~koart,
-    SUM( bseg~wrbtr ) AS w,
-*    CASE WHEN bseg~shkzg  = 'H' THEN w ELSE - w END AS w2,
-    bseg~shkzg,
-    bkpf~bldat
+    SELECT DISTINCT kna1~kunnr,
+                    lfa1~lifnr,
+                    kna1~name1,
+                    kna1~name2,
+                    lfa1~name1        AS lname1,
+                    lfa1~name2        AS lname2,
+                    bseg~pswsl,
+                    bseg~koart,
+                    SUM( bseg~wrbtr ) AS w,
+                    CASE WHEN bseg~shkzg  = 'H' THEN SUM( bseg~wrbtr )     "H borç      pozitif
+                         WHEN bseg~shkzg  = 'S' THEN SUM( - bseg~wrbtr )   "S alacak    negatif
+                    END AS w2,
+                    CASE WHEN bseg~koart = 'K' THEN lfa1~lifnr
+                         WHEN bseg~koart = 'D' THEN kna1~kunnr
+                    END  AS number,
+                    CASE WHEN bseg~koart = 'K' THEN concat( concat( lfa1~name1, ' ' ),lfa1~name2 ) "K satıcı
+                         WHEN bseg~koart = 'D' THEN concat( concat( kna1~name1, ' ' ),kna1~name2 ) "D müşteri
+                    END  AS name,
+                    substring( bkpf~bldat , 1 , 6 ) AS month,
+                    bseg~shkzg,
+                    bkpf~bldat
     FROM bseg
     LEFT JOIN kna1 ON bseg~kunnr EQ kna1~kunnr
     LEFT JOIN lfa1 ON bseg~lifnr EQ lfa1~lifnr
     LEFT JOIN bkpf ON bseg~belnr EQ bkpf~belnr
-    WHERE lfa1~lifnr IN @so_lifnr AND
-          kna1~kunnr IN @so_kunnr AND
-          bkpf~bldat IN @so_bldat AND
-          bseg~koart IN ( 'D', 'K' )  AND
-          bseg~shkzg IN ( 'H', 'S' )
-*        ( bseg~koart EQ 'D' OR bseg~koart EQ 'K')  AND "D müşteri kna1    K satıcı lfa1
-*        ( bseg~shkzg EQ 'H' OR bseg~shkzg EQ 'S')      "H + borç          S - alacak
-   GROUP BY
-  kna1~kunnr,
-  lfa1~lifnr,
-  kna1~name1,
-  kna1~name2,
-  lfa1~name1,
-  lfa1~name2,
-  bseg~pswsl,
-  bseg~koart,
-  bseg~shkzg,
-  bkpf~bldat
-   INTO TABLE @DATA(lt_tab).
+    WHERE lfa1~lifnr IN @so_lifnr
+    AND   kna1~kunnr IN @so_kunnr
+    AND   bkpf~bldat IN @so_bldat
+    AND   bseg~koart IN ( 'D', 'K' )
+    AND   bseg~shkzg IN ( 'H', 'S' )
+    GROUP BY
+    kna1~kunnr,lfa1~lifnr,kna1~name1,kna1~name2,lfa1~name1,
+    lfa1~name2,bseg~pswsl,bseg~koart,bseg~shkzg,bkpf~bldat,bseg~wrbtr
+    INTO TABLE @DATA(lt_tab).
+
 
     LOOP AT lt_tab ASSIGNING FIELD-SYMBOL(<lfs_tab>).
-      gs_alv = VALUE #( pswsl = <lfs_tab>-pswsl
-                        spmon = <lfs_tab>-bldat(6) ).
-      IF <lfs_tab>-koart EQ 'K'." satıcı.
-        gs_alv = VALUE #( BASE gs_alv no   = <lfs_tab>-lifnr
-                          isim = | { <lfs_tab>-lname1 } { <lfs_tab>-lname2 } | ).
-      ELSEIF <lfs_tab>-koart EQ 'D'." müşteri.
-        gs_alv = VALUE #( BASE gs_alv no   = <lfs_tab>-kunnr
-                          isim  = | { <lfs_tab>-name1 } { <lfs_tab>-name2 } | ).
-      ENDIF.
-
-      IF <lfs_tab>-shkzg EQ 'H'.       "H borç      pozitif
-        gs_alv-wrbtr = <lfs_tab>-w.
-      ELSEIF <lfs_tab>-shkzg EQ 'S'.    "S alacak    negatif
-        gs_alv-wrbtr = - <lfs_tab>-w.
-      ENDIF.
+      gs_alv = VALUE #( BASE gs_alv
+                             spmon = <lfs_tab>-month
+                             no    = <lfs_tab>-number
+                             isim  = <lfs_tab>-name
+                             wrbtr = <lfs_tab>-w2 ).
       COLLECT gs_alv INTO gt_alv.
     ENDLOOP.
 
     SORT gt_alv BY no spmon.
-
-*    DELETE ADJACENT DUPLICATES FROM gt_alv COMPARING spmon.
 
   ENDMETHOD.
   METHOD call_screen.
@@ -90,6 +77,7 @@ CLASS lcl_class IMPLEMENTATION.
     ENDCASE.
   ENDMETHOD.
   METHOD set_fcat.
+
     DATA:lv_count TYPE int4 VALUE 4.
 
     CLEAR gs_fcat.

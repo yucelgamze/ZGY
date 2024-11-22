@@ -18,7 +18,8 @@ TYPES:BEGIN OF gty_alv,
 *        bldat TYPE bkpf-bldat,
         spmon TYPE spmon,
         wrbtr TYPE bseg-wrbtr,
-      END OF gty_alv.
+      END OF gty_alv,
+      gtt_alv TYPE TABLE OF gty_alv.
 
 DATA:gt_alv TYPE TABLE OF gty_alv,
      gs_alv TYPE gty_alv.
