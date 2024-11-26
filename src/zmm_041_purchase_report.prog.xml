@@ -156,9 +156,8 @@
     <item>
      <ID>S</ID>
      <KEY>SO_AEDAT</KEY>
-     <ENTRY>.</ENTRY>
-     <LENGTH>9</LENGTH>
-     <SPLIT>D</SPLIT>
+     <ENTRY>SAS Yaratma tarihi</ENTRY>
+     <LENGTH>26</LENGTH>
     </item>
     <item>
      <ID>S</ID>
@@ -184,16 +183,14 @@
     <item>
      <ID>S</ID>
      <KEY>SO_BLDAT</KEY>
-     <ENTRY>.</ENTRY>
-     <LENGTH>9</LENGTH>
-     <SPLIT>D</SPLIT>
+     <ENTRY>Fatura Belge tarihi</ENTRY>
+     <LENGTH>27</LENGTH>
     </item>
     <item>
      <ID>S</ID>
      <KEY>SO_BSART</KEY>
-     <ENTRY>.</ENTRY>
-     <LENGTH>9</LENGTH>
-     <SPLIT>D</SPLIT>
+     <ENTRY>SAT Belge türü</ENTRY>
+     <LENGTH>22</LENGTH>
     </item>
     <item>
      <ID>S</ID>
@@ -219,9 +216,8 @@
     <item>
      <ID>S</ID>
      <KEY>SO_ERNAM</KEY>
-     <ENTRY>.</ENTRY>
-     <LENGTH>9</LENGTH>
-     <SPLIT>D</SPLIT>
+     <ENTRY>SAT Yaratan</ENTRY>
+     <LENGTH>19</LENGTH>
     </item>
     <item>
      <ID>S</ID>
@@ -254,9 +250,8 @@
     <item>
      <ID>S</ID>
      <KEY>SO_PSTYP</KEY>
-     <ENTRY>.</ENTRY>
-     <LENGTH>9</LENGTH>
-     <SPLIT>D</SPLIT>
+     <ENTRY>SAS Kalem tipi</ENTRY>
+     <LENGTH>22</LENGTH>
     </item>
     <item>
      <ID>S</ID>
@@ -268,9 +263,8 @@
     <item>
      <ID>S</ID>
      <KEY>SO_SASBY</KEY>
-     <ENTRY>.</ENTRY>
-     <LENGTH>9</LENGTH>
-     <SPLIT>D</SPLIT>
+     <ENTRY>SAS Yaratan</ENTRY>
+     <LENGTH>19</LENGTH>
     </item>
     <item>
      <ID>S</ID>
