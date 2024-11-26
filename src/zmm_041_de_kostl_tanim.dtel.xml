@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZMM_041_DE_KOSTL_TANIM</ROLLNAME>
+    <DDLANGUAGE>T</DDLANGUAGE>
+    <DOMNAME>TEXT40</DOMNAME>
+    <HEADLEN>40</HEADLEN>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>Masraf Yeri Tanım</DDTEXT>
+    <REPTEXT>Masraf Yeri Tanım</REPTEXT>
+    <SCRTEXT_M>Masraf Yeri Tanım</SCRTEXT_M>
+    <SCRTEXT_L>Masraf Yeri Tanım</SCRTEXT_L>
+    <DTELMASTER>T</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>
