@@ -114,7 +114,8 @@ CLASS lcl_class IMPLEMENTATION.
           workbook TYPE ole2_object,
           sheet    TYPE ole2_object,
           cell     TYPE ole2_object,
-          row      TYPE ole2_object.
+          row      TYPE ole2_object,
+          interior TYPE ole2_object.
 
     CREATE OBJECT excel 'EXCEL.APPLICATION'.
 
@@ -139,6 +140,9 @@ CLASS lcl_class IMPLEMENTATION.
     SET PROPERTY OF cell 'VALUE' = 'Belge Oluşturan'.
     CALL METHOD OF excel 'RANGE' = cell EXPORTING #1 = 'D1'.
     SET PROPERTY OF cell 'VALUE' = 'Satınalma Organizasyonu'.
+
+    CALL METHOD OF cell 'Interior' = interior.
+    SET PROPERTY OF interior 'ColorIndex' = 42.
 
 *  " Excel Sample Row 1
 **  CLEAR ls_excel_format.
@@ -376,11 +380,25 @@ CLASS lcl_class IMPLEMENTATION.
         retcode      = lv_retcode.
 
     "FRAME
+    DATA typ TYPE i.
+    FIELD-SYMBOLS <fs1> TYPE x.
+
+    ASSIGN typ TO <fs1> CASTING.
+    SET BIT 1 OF <fs1> TO 1. "thickness
+    SET BIT 2 OF <fs1> TO 0.  "1. "thickness
+    SET BIT 3 OF <fs1> TO 1.  "0. "horizontal lines
+    SET BIT 4 OF <fs1> TO 1. "vertical lines
+    SET BIT 5 OF <fs1> TO 1. "right margin
+    SET BIT 6 OF <fs1> TO 1. "bottom margin
+    SET BIT 7 OF <fs1> TO 1. "top margin
+    SET BIT 8 OF <fs1> TO 1. "left margin
+    typ = <fs1>(1).
+
     CALL METHOD lc_iref_spreadsheet->set_frame
       EXPORTING
         rangename = 'ITEM'
-        typ       = -1
-        color     = 1
+        typ       = typ
+        color     = 16
       IMPORTING
         retcode   = lv_retcode.
 
