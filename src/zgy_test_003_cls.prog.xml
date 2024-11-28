@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <PROGDIR>
-    <NAME>ZGT_TEST_012_EVENT</NAME>
+    <NAME>ZGY_TEST_003_CLS</NAME>
     <SUBC>I</SUBC>
     <RLOAD>T</RLOAD>
     <UCCHECK>X</UCCHECK>
@@ -11,8 +11,8 @@
    <TPOOL>
     <item>
      <ID>R</ID>
-     <ENTRY>event inc</ENTRY>
-     <LENGTH>9</LENGTH>
+     <ENTRY>cls inc</ENTRY>
+     <LENGTH>7</LENGTH>
     </item>
    </TPOOL>
   </asx:values>

@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <PROGDIR>
-    <NAME>ZGY_TEST_012</NAME>
+    <NAME>ZGY_TEST_003</NAME>
     <SUBC>1</SUBC>
     <RLOAD>T</RLOAD>
     <FIXPT>X</FIXPT>
@@ -12,7 +12,7 @@
    <DYNPROS>
     <item>
      <HEADER>
-      <PROGRAM>ZGY_TEST_012</PROGRAM>
+      <PROGRAM>ZGY_TEST_003</PROGRAM>
       <SCREEN>0100</SCREEN>
       <LANGUAGE>T</LANGUAGE>
       <DESCRIPT>0100</DESCRIPT>

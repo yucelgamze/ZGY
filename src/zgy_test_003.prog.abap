@@ -3,9 +3,9 @@
 *&---------------------------------------------------------------------*
 *&
 *&---------------------------------------------------------------------*
-REPORT zgy_test_012.
+REPORT zgy_test_003.
 
-INCLUDE:zgt_test_012_top,
-        zgt_test_012_cls,
-        zgt_test_012_mdl,
-        zgt_test_012_event.
+INCLUDE:zgy_test_003_top,
+        zgy_test_003_cls,
+        zgy_test_003_mdl,
+        zgy_test_003_event.

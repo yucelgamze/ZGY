@@ -1,5 +1,5 @@
 *&---------------------------------------------------------------------*
-*& Include          ZGT_TEST_012_CLS
+*& Include          ZGY_OAOR_EXCEL_EXPORT_CLS
 *&---------------------------------------------------------------------*
 CLASS lcl_class DEFINITION.
   PUBLIC SECTION.
@@ -39,6 +39,7 @@ CLASS lcl_class IMPLEMENTATION.
     FROM ekpo
     INNER JOIN ekko ON ekpo~ebeln = ekko~ebeln
     UP TO 20 ROWS
+**    UP TO 1000 ROWS
     INTO TABLE @gt_data.
   ENDMETHOD.
 
