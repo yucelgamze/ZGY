@@ -33,6 +33,8 @@ AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_fitab.
 
 START-OF-SELECTION.
   go_local->get_data( ).
+  go_local->set_fcat( ).
+  go_local->set_layout( ).
 
   IF p_file IS NOT INITIAL.
     go_local->upload_xls( ).

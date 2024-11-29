@@ -8,9 +8,6 @@
 *&---------------------------------------------------------------------*
 MODULE status_0100 OUTPUT.
   go_local->pbo_0100( ).
-  go_local->get_data( ).
-  go_local->set_fcat( ).
-  go_local->set_layout( ).
   go_local->display_alv( ).
 ENDMODULE.
 *&---------------------------------------------------------------------*
