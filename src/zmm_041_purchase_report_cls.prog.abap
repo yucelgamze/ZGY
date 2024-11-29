@@ -50,7 +50,7 @@ CLASS lcl_class IMPLEMENTATION.
                      eban~badat,
                      eban~bsart,
                      eban~ekgrp,
-                     CAST( 0 AS CURR( 17,2 ) ) AS sat_toplam_deger,
+                     CAST( 0 AS D34N ) AS sat_toplam_deger, ""CAST( 0 AS CURR( 17,2 ) ) AS sat_toplam_deger,
                      eban~preis,
                      eban~peinh,
 **                     ( eban~preis / eban~peinh * eban~menge  ) AS sat_toplam_deger,
@@ -70,6 +70,10 @@ CLASS lcl_class IMPLEMENTATION.
                      eban~meins,
                      eban~menge,
                      ( eban~menge - eban~bsmng ) AS sat_acik_miktar,
+                     eban~werks                  AS werks_sat,
+                     w~name1                     AS werks_name1_sat,
+                     eban~lgort                  AS lgort_sat,
+                     l~lgobe                     AS lgobe_sat,
                      ekko~bsart                  AS sas_bsart,
                      ekko~ebeln,
                      ekpo~ebelp,
@@ -120,9 +124,16 @@ CLASS lcl_class IMPLEMENTATION.
                      CAST( ' ' AS CHAR( 12 ) )  AS rbkp_usnam,"rbkp~usnam AS rbkp_usnam,
                      CAST( ' ' AS CHAR( 12 ) )  AS bseg_anln1"bseg~anln1 AS bseg_anln1
     FROM eban
+    LEFT JOIN t001w AS w
+                     ON eban~werks   = w~werks
+                    AND w~spras      = @sy-langu
+    LEFT JOIN t001l AS l
+                     ON eban~werks   = l~werks
+                    AND eban~lgort   = l~lgort
     LEFT  JOIN ekpo  ON eban~banfn   = ekpo~banfn
                     AND eban~bnfpo   = ekpo~bnfpo
     LEFT  JOIN ekko  ON ekpo~ebeln   = ekko~ebeln
+                    AND ekko~bstyp   = 'F'         "test: F
     LEFT  JOIN mara  ON eban~matnr   = mara~matnr
     LEFT  JOIN makt  ON mara~matnr   = makt~matnr
                     AND makt~spras   = @sy-langu
@@ -179,7 +190,7 @@ CLASS lcl_class IMPLEMENTATION.
                            eban~badat, "CAST( '00000000' AS DATS )   AS badat,
                            eban~bsart,
                            eban~ekgrp,
-                           CAST( 0 AS CURR( 17,2 ) ) AS sat_toplam_deger,
+                           CAST( 0 AS D34N ) AS sat_toplam_deger, ""CAST( 0 AS CURR( 17,2 ) ) AS sat_toplam_deger,
                            eban~preis,
                            eban~peinh,
                            eban~waers AS sat_para_birimi,
@@ -195,6 +206,10 @@ CLASS lcl_class IMPLEMENTATION.
                            CAST( ' ' AS UNIT( 3 ) )   AS meins,
                            CAST( 0 AS QUAN( 13, 3 ) ) AS menge,
                            CAST( 0 AS QUAN( 13, 3 ) ) AS sat_acik_miktar,
+                           eban~werks                 AS werks_sat,
+                           w~name1                    AS werks_name1_sat,
+                           eban~lgort                 AS lgort_sat,
+                           l~lgobe                    AS lgobe_sat,
                            ekko~bsart                 AS sas_bsart,
                            ekko~ebeln,
                            ekpo~ebelp,
@@ -247,7 +262,14 @@ CLASS lcl_class IMPLEMENTATION.
       FROM ekpo
       LEFT JOIN eban   ON ekpo~banfn   = eban~banfn
                       AND ekpo~bnfpo   = eban~bnfpo
-      LEFT  JOIN ekko  ON ekpo~ebeln   = ekko~ebeln
+      LEFT JOIN t001w AS w
+                       ON eban~werks   = w~werks
+                      AND w~spras      = @sy-langu
+      LEFT JOIN t001l AS l
+                       ON eban~werks   = l~werks
+                      AND eban~lgort   = l~lgort
+      INNER JOIN ekko  ON ekpo~ebeln   = ekko~ebeln
+                      AND ekko~bstyp   = 'F'         "test: F ve union da left -> inner
       LEFT  JOIN mara  ON ekpo~matnr   = mara~matnr
       LEFT  JOIN makt  ON mara~matnr   = makt~matnr
                       AND makt~spras   = @sy-langu
@@ -1052,6 +1074,32 @@ CLASS lcl_class IMPLEMENTATION.
           <lfs_table>-sas_kalem_metni &&= <lfs_td_lines>-tdline.
         ENDLOOP.
 
+        REFRESH:lt_tline.
+
+        CALL FUNCTION 'READ_TEXT'
+          EXPORTING
+            client                  = sy-mandt
+            id                      = 'F03'
+            language                = sy-langu
+            name                    = CONV char70( lv_name )
+            object                  = 'EKPO'
+          TABLES
+            lines                   = lt_tline
+          EXCEPTIONS
+            id                      = 1
+            language                = 2
+            name                    = 3
+            not_found               = 4
+            object                  = 5
+            reference_check         = 6
+            wrong_access_to_archive = 7
+            OTHERS                  = 8.
+
+        LOOP AT lt_tline ASSIGNING <lfs_td_lines>.
+          <lfs_table>-sas_kalem_notu &&= <lfs_td_lines>-tdline.
+        ENDLOOP.
+
+
       ENDIF.
 
 
@@ -1360,8 +1408,22 @@ CLASS lcl_class IMPLEMENTATION.
           SET PARAMETER ID : 'BES' FIELD gs_alv-ebeln.
           CALL TRANSACTION 'ME23N' AND SKIP FIRST SCREEN.
         WHEN 'MBLNR'.
-          SET PARAMETER ID : 'MBN' FIELD gs_alv-mblnr.
-          CALL TRANSACTION 'MIGO'  AND SKIP FIRST SCREEN.
+***          SET PARAMETER ID : 'MBN' FIELD gs_alv-mblnr.
+***          CALL TRANSACTION 'MIGO'  AND SKIP FIRST SCREEN.
+          CALL FUNCTION 'MIGO_DIALOG'
+            EXPORTING
+              i_action            = 'A04'
+              i_refdoc            = 'R02'
+              i_notree            = 'X'
+              i_no_auth_check     = ' '
+              i_skip_first_screen = 'X'
+              i_deadend           = 'X'
+              i_okcode            = 'OK_GO'
+              i_new_rollarea      = 'X'
+              i_mblnr             = gs_alv-mblnr
+            EXCEPTIONS
+              illegal_combination = 1
+              OTHERS              = 2.
         WHEN 'BELNR'.
           SET PARAMETER ID : 'RBN' FIELD gs_alv-belnr.
           CALL TRANSACTION 'MIR4'  AND SKIP FIRST SCREEN.
