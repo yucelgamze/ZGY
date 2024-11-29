@@ -168,10 +168,10 @@ CLASS lcl_class IMPLEMENTATION.
         lv_tot = <lfs_item>-netwr.
 **        lv_total += <lfs_item>-netwr.
 
-        DATA:lv_totc TYPE char20,
-             lv_totx TYPE char20,
-             lv_toty TYPE char20,
-             lv_totz TYPE char20.
+        DATA:lv_totc TYPE char40,
+             lv_totx TYPE char40,
+             lv_toty TYPE char40,
+             lv_totz TYPE char40.
 
         CALL FUNCTION 'HRCM_AMOUNT_TO_STRING_CONVERT'
           EXPORTING
@@ -272,10 +272,10 @@ CLASS lcl_class IMPLEMENTATION.
         lv_total += <lfs_total>-netwr.
         <lfs_total>-lv_total = lv_total.
 
-        DATA:lv_total_c TYPE char20,
-             lv_total_x TYPE char20,
-             lv_total_y TYPE char20,
-             lv_total_z TYPE char20.
+        DATA:lv_total_c TYPE char40,
+             lv_total_x TYPE char40,
+             lv_total_y TYPE char40,
+             lv_total_z TYPE char40.
 
         CALL FUNCTION 'HRCM_AMOUNT_TO_STRING_CONVERT'
           EXPORTING
