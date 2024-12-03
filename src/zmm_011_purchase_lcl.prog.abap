@@ -171,8 +171,10 @@ CLASS lcl_class IMPLEMENTATION.
       ls_requisition_items_to_delete TYPE bapieband,
       lt_return                      TYPE TABLE OF  bapireturn.
 
-    LOOP AT gt_alv ASSIGNING FIELD-SYMBOL(<lfs_del>) GROUP BY ( purchaserequisition = <lfs_del>-purchaserequisition )
-                                                     ASCENDING ASSIGNING FIELD-SYMBOL(<lfs_delx>).
+    DATA(lt_talv) = gt_alv.
+
+    LOOP AT lt_talv ASSIGNING FIELD-SYMBOL(<lfs_del>) GROUP BY ( purchaserequisition = <lfs_del>-purchaserequisition )
+                                                      ASCENDING ASSIGNING FIELD-SYMBOL(<lfs_delx>).
 
       lv_number = <lfs_delx>-purchaserequisition.
 
@@ -205,6 +207,12 @@ CLASS lcl_class IMPLEMENTATION.
       ELSE.
 
         CALL FUNCTION 'BAPI_TRANSACTION_ROLLBACK'.
+
+        DELETE gt_alv WHERE purchaserequisition = <lfs_delx>-purchaserequisition.  "silemediği satırı alvde göstermesin ve mail gitmesin
+
+        DELETE FROM zmm_011_t_alv WHERE purchaserequisition = <lfs_delx>-purchaserequisition.
+
+        cl_demo_output=>display( lt_return ).
       ENDIF.
 
     ENDLOOP.

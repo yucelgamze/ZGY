@@ -36,6 +36,7 @@ CLASS lcl_class IMPLEMENTATION.
                     vbap~arktx,
                     vbap~kwmeng,
                     vbap~vrkme,
+                    vbap~abgru AS vbap_abgru,
                     vbak~augru,
                     vbak~auart AS auart_x,
                     vbap~netwr AS netwr_x,
@@ -47,6 +48,8 @@ CLASS lcl_class IMPLEMENTATION.
                     vbap~lgort,
                     tvagt~bezei AS abgru,
                     vbak~gbstk,
+***                    SUM(  vbap~mwsbp + vbak~netwr ) AS vergi,
+                    CAST(  vbap~mwsbp + vbak~netwr AS CURR( 17,2 ) ) AS vergi,
                     lips~erdat AS erdat_t,
                     lips~vbeln AS vbeln_vl,
                     lips~posnr AS posnr_vl,
@@ -57,11 +60,6 @@ CLASS lcl_class IMPLEMENTATION.
                     lips~charg,
                     lips~matkl,
                     vbrp~vbeln AS vbeln_vf,
-*                    CASE WHEN vbak~fksak = ' ' OR vbak~fksak = 'A'
-*                         THEN CAST( '00000000' AS DATS )
-*                         WHEN lips~fksta = ' ' OR lips~fksta = 'A'
-*                         THEN CAST( '00000000' AS DATS )
-*                    END AS fkdat,
                     vbrk~fkdat,
                     lips~fksta,
                     vbrk~belnr,
@@ -113,16 +111,95 @@ CLASS lcl_class IMPLEMENTATION.
      AND  likp~kunnr  IN @so_mta
      AND  likp~vbeln  IN @so_tes
      AND  vbrk~vbeln  IN @so_fat
-*************      UNION
-
       ORDER BY vbap~vbeln, vbap~posnr
-     INTO TABLE @DATA(lt_data).
-
+     INTO TABLE @DATA(lt_data)
+                    .
 
 ***    BREAK xgamzey.
 
-    SORT lt_data BY vbeln_vl posnr_vl.
+    SORT lt_data BY vbeln_vl posnr_vl vbeln_vf.
     DELETE ADJACENT DUPLICATES FROM lt_data COMPARING vbeln posnr vbeln_vl posnr_vl.
+
+    SELECT DISTINCT vbak~ernam,
+                    vbak~kunnr,
+                    vbap~vbeln,
+                    vbap~posnr,
+                    prcd_elements~kwert,
+                    lips~vbeln AS vbeln_vl,
+                    lips~posnr AS posnr_vl,
+                    vbrp~vbeln AS vbeln_vf,
+                    vbrk~fkdat,
+                    vbrk~belnr,
+                    likp~gbstk AS gbstk_t,
+                    likp~kostk,
+                    lips~wbsta,
+                    CASE WHEN vbak~fksak IS NOT INITIAL
+                         THEN vbak~fksak
+                         ELSE lips~fksta
+                    END AS faturalama_durumu
+     FROM vbak
+     INNER JOIN vbap         ON vbak~vbeln          = vbap~vbeln
+     INNER JOIN vbkd         ON vbak~vbeln          = vbkd~vbeln
+                            AND vbkd~posnr          = @space
+     LEFT JOIN prcd_elements ON vbak~knumv          = prcd_elements~knumv
+                            AND vbap~posnr          = prcd_elements~kposn
+                            AND prcd_elements~kschl = 'ZL10'
+     LEFT JOIN lips          ON vbap~vbeln          = lips~vgbel
+                            AND vbap~posnr          = lips~vgpos
+     LEFT JOIN likp         ON lips~vbeln           = likp~vbeln
+     LEFT JOIN vbrp         ON vbap~vbeln           = vbrp~aubel
+                            AND vbap~posnr          = vbrp~aupos
+                           AND ( vbrp~vgbel = lips~vbeln AND vbrp~vgpos = lips~posnr )
+     LEFT JOIN vbrk         ON vbrp~vbeln           = vbrk~vbeln
+                            AND vbrk~fksto          = @space
+     WHERE vbak~kunnr IN @so_kunnr
+     AND  vbak~audat  IN @so_audat
+     AND  vbap~vbeln  IN @so_vbeln
+     AND  vbap~posnr  IN @so_posnr
+     AND  vbak~vkorg  IN @so_vkorg
+     AND  vbak~vtweg  IN @so_vtweg
+     AND  vbap~abgru  IN @so_abgru
+     AND  vbak~augru  IN @so_augru
+     AND  vbak~auart  IN @so_auart
+     AND  vbap~matnr  IN @so_matnr
+     AND  lips~werks  IN @so_werks
+     AND  lips~lgort  IN @so_lgort
+     AND  likp~kunnr  IN @so_mta
+     AND  likp~vbeln  IN @so_tes
+     AND  vbrk~vbeln  IN @so_fat
+     ORDER BY  vbap~vbeln,vbap~posnr
+     INTO TABLE @DATA(lt_bill).
+
+    SORT lt_bill BY vbeln_vl posnr_vl vbeln_vf.
+    DELETE ADJACENT DUPLICATES FROM lt_bill COMPARING vbeln posnr vbeln_vl posnr_vl.
+
+***    BREAK xgamzey.
+
+    LOOP AT lt_data ASSIGNING FIELD-SYMBOL(<lfs_data>).
+      CHECK <lfs_data>-vbeln_vl IS NOT INITIAL AND <lfs_data>-vbeln_vf IS NOT INITIAL.
+      LOOP AT lt_bill ASSIGNING FIELD-SYMBOL(<lfs_bill>) WHERE vbeln    = <lfs_data>-vbeln
+                                                          AND  posnr    = <lfs_data>-posnr
+                                                          AND  vbeln_vl = <lfs_data>-vbeln_vl
+                                                          AND  posnr_vl = <lfs_data>-posnr_vl
+******                                                          AND  vbeln_vf = <lfs_data>-vbeln_vf
+                                                          AND  gbstk_t  = <lfs_data>-gbstk_t
+                                                          AND  kostk    = <lfs_data>-kostk
+                                                          AND  wbsta    = <lfs_data>-wbsta
+                                                          AND  faturalama_durumu = <lfs_data>-faturalama_durumu.
+        EXIT.
+      ENDLOOP.
+      IF sy-subrc IS NOT INITIAL.
+        DELETE lt_data  WHERE vbeln    = <lfs_data>-vbeln
+                         AND  posnr    = <lfs_data>-posnr
+                         AND  vbeln_vl = <lfs_data>-vbeln_vl
+                         AND  posnr_vl = <lfs_data>-posnr_vl
+******                         AND  vbeln_vf = <lfs_data>-vbeln_vf
+                         AND  gbstk_t  = <lfs_data>-gbstk_t
+                         AND  kostk    = <lfs_data>-kostk
+                         AND  wbsta    = <lfs_data>-wbsta
+                         AND  faturalama_durumu = <lfs_data>-faturalama_durumu.
+      ENDIF.
+    ENDLOOP.
 
 
     SORT lt_data BY vbeln posnr vbeln_vl posnr_vl.
@@ -146,8 +223,6 @@ CLASS lcl_class IMPLEMENTATION.
         OTHERS         = 2.
 
     LOOP AT gt_alv ASSIGNING FIELD-SYMBOL(<lfs_alv>).
-
-      <lfs_alv>-vergi = <lfs_alv>-mwsbp + <lfs_alv>-netwr.
 
       READ TABLE lt_domain INTO DATA(ls_domain) WITH KEY domvalue_l = <lfs_alv>-gbstk.
       IF sy-subrc IS INITIAL.
@@ -235,7 +310,7 @@ CLASS lcl_class IMPLEMENTATION.
   METHOD set_fcat.
     CALL FUNCTION 'LVC_FIELDCATALOG_MERGE'
       EXPORTING
-        i_structure_name       = 'ZSD_002_S_FLOW_REPORT'
+        i_structure_name       = 'ZSD_002_S_FLOW'
       CHANGING
         ct_fieldcat            = gt_fcat
       EXCEPTIONS

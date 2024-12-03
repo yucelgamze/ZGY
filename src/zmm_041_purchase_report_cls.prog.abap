@@ -203,9 +203,9 @@ CLASS lcl_class IMPLEMENTATION.
                                 ELSE makt~maktx
                             END AS maktx,
 *                           mara~zz1_uzuntanim_prd,
-                           CAST( ' ' AS UNIT( 3 ) )   AS meins,
-                           CAST( 0 AS QUAN( 13, 3 ) ) AS menge,
-                           CAST( 0 AS QUAN( 13, 3 ) ) AS sat_acik_miktar,
+                           eban~meins,                                      ""CAST( ' ' AS UNIT( 3 ) )   AS meins,
+                           eban~menge,                                      ""CAST( 0 AS QUAN( 13, 3 ) ) AS menge,
+                           ( eban~menge - eban~bsmng ) AS sat_acik_miktar,  ""CAST( 0 AS QUAN( 13, 3 ) ) AS sat_acik_miktar,
                            eban~werks                 AS werks_sat,
                            w~name1                    AS werks_name1_sat,
                            eban~lgort                 AS lgort_sat,
@@ -1402,12 +1402,15 @@ CLASS lcl_class IMPLEMENTATION.
     IF sy-subrc IS INITIAL.
       CASE e_column_id-fieldname.
         WHEN 'BANFN'.
+          CHECK gs_alv-banfn IS NOT INITIAL.
           SET PARAMETER ID : 'BAN' FIELD gs_alv-banfn.
           CALL TRANSACTION 'ME53N' AND SKIP FIRST SCREEN.
         WHEN 'EBELN'.
+          CHECK gs_alv-ebeln IS NOT INITIAL.
           SET PARAMETER ID : 'BES' FIELD gs_alv-ebeln.
           CALL TRANSACTION 'ME23N' AND SKIP FIRST SCREEN.
         WHEN 'MBLNR'.
+          CHECK gs_alv-mblnr IS NOT INITIAL.
 ***          SET PARAMETER ID : 'MBN' FIELD gs_alv-mblnr.
 ***          CALL TRANSACTION 'MIGO'  AND SKIP FIRST SCREEN.
           CALL FUNCTION 'MIGO_DIALOG'
@@ -1425,6 +1428,7 @@ CLASS lcl_class IMPLEMENTATION.
               illegal_combination = 1
               OTHERS              = 2.
         WHEN 'BELNR'.
+          CHECK gs_alv-belnr IS NOT INITIAL.
           SET PARAMETER ID : 'RBN' FIELD gs_alv-belnr.
           CALL TRANSACTION 'MIR4'  AND SKIP FIRST SCREEN.
       ENDCASE.
