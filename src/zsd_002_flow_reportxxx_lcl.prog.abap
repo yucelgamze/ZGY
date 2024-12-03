@@ -181,40 +181,40 @@ CLASS lcl_class IMPLEMENTATION.
 
       <lfs_alv>-vergi = <lfs_alv>-mwsbp + <lfs_alv>-netwr_vbak.
 
-      READ TABLE lt_domain INTO DATA(ls_domain) WITH KEY domvalue_l = <lfs_alv>-gbstk.
+      READ TABLE lt_domain INTO DATA(ls_domain) WITH KEY domvalue_l = <lfs_alv>-gbstk BINARY SEARCH.
       IF sy-subrc IS INITIAL.
         <lfs_alv>-gbstk = |{ ls_domain-ddtext }|.
         IF <lfs_alv>-gbstk = 'X'.
           <lfs_alv>-gbstk =  ' '.
         ENDIF.
       ENDIF.
-      READ TABLE lt_domain INTO ls_domain WITH KEY domvalue_l = <lfs_alv>-gbstk_t.
+      READ TABLE lt_domain INTO ls_domain WITH KEY domvalue_l = <lfs_alv>-gbstk_t BINARY SEARCH.
       IF sy-subrc IS INITIAL.
         <lfs_alv>-gbstk_t = |{ ls_domain-ddtext }|.
       ENDIF.
-      READ TABLE lt_domain INTO ls_domain WITH KEY domvalue_l = <lfs_alv>-kostk.
+      READ TABLE lt_domain INTO ls_domain WITH KEY domvalue_l = <lfs_alv>-kostk BINARY SEARCH.
       IF sy-subrc IS INITIAL.
         <lfs_alv>-kostk = |{ ls_domain-ddtext }|.
       ENDIF.
-      READ TABLE lt_domain INTO ls_domain WITH KEY domvalue_l = <lfs_alv>-fksta.
+      READ TABLE lt_domain INTO ls_domain WITH KEY domvalue_l = <lfs_alv>-fksta BINARY SEARCH.
       IF sy-subrc IS INITIAL.
         <lfs_alv>-fksta = |{ ls_domain-ddtext }|.
       ENDIF.
-      READ TABLE lt_domain INTO ls_domain WITH KEY domvalue_l = <lfs_alv>-fksak.
+      READ TABLE lt_domain INTO ls_domain WITH KEY domvalue_l = <lfs_alv>-fksak BINARY SEARCH.
       IF sy-subrc IS INITIAL.
         <lfs_alv>-fksak = |{ ls_domain-ddtext }|.
         IF <lfs_alv>-fksak = 'X'.
           <lfs_alv>-fksak =  ' '.
         ENDIF.
       ENDIF.
-      READ TABLE lt_domain INTO ls_domain WITH KEY domvalue_l = <lfs_alv>-lfgsa.
+      READ TABLE lt_domain INTO ls_domain WITH KEY domvalue_l = <lfs_alv>-lfgsa BINARY SEARCH.
       IF sy-subrc IS INITIAL.
         <lfs_alv>-lfgsa = |{ ls_domain-ddtext }|.
         IF <lfs_alv>-lfgsa = 'X'.
           <lfs_alv>-lfgsa =  ' '.
         ENDIF.
       ENDIF.
-      READ TABLE lt_domain INTO ls_domain WITH KEY domvalue_l = <lfs_alv>-wbsta.
+      READ TABLE lt_domain INTO ls_domain WITH KEY domvalue_l = <lfs_alv>-wbsta BINARY SEARCH.
       IF sy-subrc IS INITIAL.
         <lfs_alv>-wbsta = |{ ls_domain-ddtext }|.
       ENDIF.
